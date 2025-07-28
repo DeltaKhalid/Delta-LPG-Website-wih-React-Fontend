@@ -155,8 +155,68 @@ const About = () => {
                                         
                                     </div>
                                 </div>
+
+
+
+
+
+
+
                             </div>
                         </div>
+                    </section>
+
+                    <section>
+
+
+
+
+                        
+                        {/* <div className="container section-title text-center">
+                            <div className="section-title text-center">
+                            <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p> */}
+                            {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{aboutData.title}</p> */}
+                            {/* <div className="section-title-shape-1 ">
+                                <img src="src/assets/images/shapes/fire_icon.png" alt=""/>
+                            </div>
+                        </div>
+
+                        </div> */}
+
+                        <div className="section-title text-center">
+                            <div className="section-sub-title-box">
+
+                                <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p>
+                                {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{distributionData.title_one}</p> */}
+
+                                <div className="section-title-shape-1">
+                                    <img src="src/assets/images/shapes/fire_icon.png" alt=""/>
+                                </div>
+                            </div>
+                            {/*<h2 className="section-title__title wow fadeInUp" data-wow-delay="100ms" >Our Mission and  Vision <br> </h2>*/}
+                        </div>
+
+
+
+                        <div className="section-title text-center">
+                            <div className="section-sub-title-box">
+
+                                {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p> */}
+                                {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{distributionData.title_one}</p> */}
+
+                                <div className="md-container">
+                                    <img src="src/assets/images/gallery/delta_dis_network.png" alt=""/>
+                                </div>
+                            </div>
+                            {/*<h2 className="section-title__title wow fadeInUp" data-wow-delay="100ms" >Our Mission and  Vision <br> </h2>*/}
+                        </div>
+
+
+                        
+
+
+
+                        
                     </section>
 
 
