@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { fetchContactPage } from '../api/apiCall';
+import emailjs from 'emailjs-com';
 
 const officeImages = {
   "CORPORATE OFFICE": "src/assets/images/brand/TK-Bhaban_Im_600_600.png",
@@ -8,12 +9,27 @@ const officeImages = {
 };
 
 const Contact = () => {
+  const form = useRef(); // ✅ Correct hook usage
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_2jqzp7f', 'template_8xabx6r', form.current, 'b8r6OaDt8WjtaG_Tx')
+      .then((result) => {
+        console.log('Message sent successfully:', result.text);
+        alert("Message sent!");
+        form.current.reset();
+      }, (error) => {
+        console.log('Message sending error:', error.text);
+        alert("Failed to send message.");
+      });
+  };
+
   const [activeTab, setActiveTab] = useState("CORPORATE OFFICE");
   const [animate, setAnimate] = useState(false);
   const [contactData, setContactData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch API data
   useEffect(() => {
     const getContactInfo = async () => {
       try {
@@ -29,7 +45,6 @@ const Contact = () => {
     getContactInfo();
   }, []);
 
-  // Animate tab change
   useEffect(() => {
     setAnimate(true);
     const timer = setTimeout(() => setAnimate(false), 500);
@@ -39,7 +54,6 @@ const Contact = () => {
   if (loading) return <p>Loading contact info...</p>;
   if (!contactData) return <p>No contact data available.</p>;
 
-  // Office details from API
   const dynamicOfficeData = {
     "CORPORATE OFFICE": {
       image: officeImages["CORPORATE OFFICE"],
@@ -68,7 +82,8 @@ const Contact = () => {
 
   return (
     <div className="page-wrapper">
-      {/* Header Section */}
+
+      {/* Header */}
       <section className="page-header fadeInUp">
         <div
           className="page-header-bg"
@@ -96,7 +111,7 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Tab Section */}
+      {/* Office Tab Section */}
       <section>
         <div className="contact-container">
           <div className="tab-menu">
@@ -128,7 +143,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Contact Form */}
       <section className="contact-page">
         <div className="contact-page-shape-1">
           <img src="src/assets/images/shapes/contact-page-shape-1.png" alt="decor" />
@@ -145,23 +160,35 @@ const Contact = () => {
           <div className="row">
             <div className="col-xl-12">
               <div className="contact-page__form">
-                <form className="comment-one__form contact-form-validated" noValidate>
+
+                <form
+                  ref={form}
+                  onSubmit={sendEmail}
+                  className="comment-one__form contact-form-validated"
+                  noValidate
+                >
                   <div className="row">
                     <div className="col-xl-6">
                       <div className="comment-form__input-box">
-                        <input type="text" placeholder="Your name" name="name" />
+
+                        <input type="text" name="from_name" placeholder="Your name" required />
+
                       </div>
                     </div>
                     <div className="col-xl-6">
                       <div className="comment-form__input-box">
-                        <input type="email" placeholder="Email address" name="email" />
+
+                        <input type="email" name="from_email" placeholder="Email address" required />
+
                       </div>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-xl-12">
                       <div className="comment-form__input-box text-message-box">
-                        <textarea name="message" placeholder="Write a message"></textarea>
+
+                        <textarea name="message" placeholder="Write a message" required></textarea>
+
                       </div>
                       <div className="comment-form__btn-box">
                         <button type="submit" className="thm-btn comment-form__btn">
@@ -171,34 +198,294 @@ const Contact = () => {
                     </div>
                   </div>
                 </form>
+
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="google-map google-map-two">
-        
-
-
-
-        {/* <iframe
-          src={office.map}
-          width="100%"
-          height="450"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Google Map"
-        ></iframe> */}
-      </section>
     </div>
   );
 };
 
 export default Contact;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState, useRef } from 'react';
+
+// import { fetchContactPage } from '../api/apiCall';
+// import emailjs from 'emailjs-com';
+
+
+// const officeImages = {
+// "CORPORATE OFFICE": "src/assets/images/brand/TK-Bhaban_Im_600_600.png",
+// "REGISTERED OFFICE": "src/assets/images/brand/secom_img_600_600.png",
+// "MONGLA OFFICE": "src/assets/images/brand/mongla_office_img_600_600.png",
+// };
+
+
+// const form = useRef();
+
+// const sendEmail = (e) => {
+//     e.preventDefault();
+
+//     // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+//     emailjs.sendForm('service_2jqzp7f', 'template_6jwzadn', form.current, 'kp-bQ1XkH_2N0p-Br')
+//     .then((result) => {
+//         console.log('Message sent successfully:', result.text);
+//         alert("Message sent!");
+//         form.current.reset(); // clear form
+//     }, (error) => {
+//         console.log('Message sending error:', error.text);
+//         alert("Failed to send message.");
+//     });
+// };
+
+
+
+// const Contact = () => {
+
+//   const [activeTab, setActiveTab] = useState("CORPORATE OFFICE");
+//   const [animate, setAnimate] = useState(false);
+//   const [contactData, setContactData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
+//   // Fetch API data
+//   useEffect(() => {
+//     const getContactInfo = async () => {
+//       try {
+//         const data = await fetchContactPage();
+//         setContactData(data);
+//         console.log("Contact Page Data:", data);
+//       } catch (error) {
+//         console.error('Failed to load contact info:', error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     getContactInfo();
+//   }, []);
+
+//   // Animate tab change
+//   useEffect(() => {
+//     setAnimate(true);
+//     const timer = setTimeout(() => setAnimate(false), 500);
+//     return () => clearTimeout(timer);
+//   }, [activeTab]);
+
+//   if (loading) return <p>Loading contact info...</p>;
+//   if (!contactData) return <p>No contact data available.</p>;
+
+//   // Office details from API
+//   const dynamicOfficeData = {
+//     "CORPORATE OFFICE": {
+//       image: officeImages["CORPORATE OFFICE"],
+//       address: contactData.office_1_address,
+//       email: contactData.office_1_email,
+//       phone: contactData.office_1_phone_1,
+//       map: contactData.office_1_map,
+//     },
+//     "REGISTERED OFFICE": {
+//       image: officeImages["REGISTERED OFFICE"],
+//       address: contactData.office_2_address,
+//       email: contactData.office_2_email,
+//       phone: contactData.office_2_phone_1,
+//       map: contactData.office_2_map,
+//     },
+//     "MONGLA OFFICE": {
+//       image: officeImages["MONGLA OFFICE"],
+//       address: contactData.office_3_address,
+//       email: contactData.office_3_email,
+//       phone: contactData.office_3_phone_1,
+//       map: contactData.office_3_map,
+//     },
+//   };
+
+//   const office = dynamicOfficeData[activeTab];
+
+//   return (
+//     <div className="page-wrapper">
+//       {/* Header Section */}
+//       <section className="page-header fadeInUp">
+//         <div
+//           className="page-header-bg"
+//           style={{ backgroundImage: "url(src/assets/images/backgrounds/contact_header_banner_01.jpg)" }}
+//         ></div>
+//         <div className="container">
+//           <div className="page-header__inner">
+//             <ul className="thm-breadcrumb list-unstyled">
+//               <li><a href="/">Home</a></li>
+//               <li><span>/</span></li>
+//               <li>Contact</li>
+//             </ul>
+//             <h2>Contact</h2>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Section Title */}
+//       <div className="section-title text-center margin_top_50_px">
+//         <div className="section-sub-title-box">
+//           <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms">Contact with us</p>
+//           <div className="section-title-shape-1">
+//             <img src="src/assets/images/shapes/fire_icon.png" alt="icon" />
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Tab Section */}
+//       <section>
+//         <div className="contact-container">
+//           <div className="tab-menu">
+//             {Object.keys(dynamicOfficeData).map((tab) => (
+//               <button
+//                 key={tab}
+//                 className={`tab-button ${activeTab === tab ? "active" : ""}`}
+//                 onClick={() => setActiveTab(tab)}
+//               >
+//                 {tab}
+//               </button>
+//             ))}
+//           </div>
+
+//           <div className={`info-box ${animate ? "fade-in" : ""}`}>
+//             <div className="info-left">
+//               <img src={office.image} alt={activeTab} />
+//             </div>
+//             <div className="info-right">
+//               <h3>{activeTab}</h3>
+//               <p><i className="fas fa-map-marker-alt"></i> {office.address}</p>
+//               <p><i className="fas fa-envelope"></i> {office.email}</p>
+//               <p><i className="fas fa-phone"></i> {office.phone}</p>
+//               <a href={office.map} target="_blank" rel="noopener noreferrer">
+//                 <i className="fas fa-map-pin"></i> View on Google Map
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Contact Form Section */}
+//       <section className="contact-page">
+
+//         <div className="contact-page-shape-1">
+//           <img src="src/assets/images/shapes/contact-page-shape-1.png" alt="decor" />
+//         </div>
+//         <div className="container margin_top_50_px">
+//           <div className="section-title text-center">
+//             <div className="section-sub-title-box">
+//               <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms">Send Your Message</p>
+//               <div className="section-title-shape-1">
+//                 <img src="src/assets/images/shapes/fire_icon.png" alt="icon" />
+//               </div>
+//             </div>
+//           </div>
+//           <div className="row">
+//             <div className="col-xl-12">
+//               <div className="contact-page__form">
+
+
+
+//                 {/* <form 
+//                     ref={form}
+//                     onSubmit={sendEmail}
+//                     className="comment-one__form contact-form-validated"
+//                         noValidate> */}
+                
+//                 <form 
+//                     // ref={form}
+//                     // onSubmit={sendEmail}
+//                     className="comment-one__form contact-form-validated"
+//                         noValidate>
+
+//                   <div className="row">
+//                     <div className="col-xl-6">
+//                       <div className="comment-form__input-box">
+//                         <input type="text" placeholder="Your name" name="name" />
+//                       </div>
+//                     </div>
+//                     <div className="col-xl-6">
+//                       <div className="comment-form__input-box">
+//                         <input type="email" placeholder="Email address" name="email" />
+//                       </div>
+//                     </div>
+//                   </div>
+//                   <div className="row">
+//                     <div className="col-xl-12">
+//                       <div className="comment-form__input-box text-message-box">
+//                         <textarea name="message" placeholder="Write a message"></textarea>
+//                       </div>
+//                       <div className="comment-form__btn-box">
+//                         <button type="submit" className="thm-btn comment-form__btn">
+//                           <i className="fa fa-arrow-right"></i> Send a message
+//                         </button>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </form>
+
+
+
+
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//     </div>
+//   );
+// };
+
+// export default Contact;
 
 
 
