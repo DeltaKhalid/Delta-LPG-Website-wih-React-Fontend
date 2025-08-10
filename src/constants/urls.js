@@ -50,6 +50,8 @@ class Urls {
   static boardOfDirectors = `${Urls.baseUrl}/board-of-directors`;
   // --- Faq Question and Answer API --- //
   static faq = `${Urls.baseUrl}/faq-add/`;
+  // --- Home Page Active Product list show --- //
+  static activeProducts = `${Urls.baseUrl}/active-product-list/`;
 
 
 

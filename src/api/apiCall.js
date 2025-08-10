@@ -77,5 +77,9 @@ export const fetchBoardOfDirectors = async () => {
 export const fetchFaqData = async () => {
   return await networkCallRequest(Urls.faq);
 };
+// --- Home Page Active Product list --- //
+export const fetchActiveProducts = async () => {
+  return await networkCallRequest(Urls.activeProducts);
+};
 
 

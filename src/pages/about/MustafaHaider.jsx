@@ -103,9 +103,9 @@ const MustafaHaider = () => {
                         </p>
 
                         <div className="md-image-gallery">
+                            <img src="src/assets/images/brand/tk_logo_180_3.png" alt="Image 3" />
                             <img src="src/assets/images/brand/samuda_logo_180.png" alt="Image 1" />
                             <img src="src/assets/images/brand/deltalpg_logo_180.png" alt="Image 2" />
-                            <img src="src/assets/images/brand/tk_logo_180_3.png" alt="Image 3" />
                             <img src="src/assets/images/brand/super_logo_180.png" alt="Image 4" />
                             <img src="src/assets/images/brand/premier_logo_180.png" alt="Image 5" />
                         </div>

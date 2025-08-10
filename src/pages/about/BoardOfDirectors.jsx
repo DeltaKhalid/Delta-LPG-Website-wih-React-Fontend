@@ -120,7 +120,7 @@ const BoardOfDirectors = () => {
                                     
                                         <Link
                                             to={getRouteByName(director.name)}
-                                            target="_blank"
+                                            // target="_blank"
                                             className="team-one__single"
                                             style={{ textDecoration: "none", color: "inherit" }}>
                                         

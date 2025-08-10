@@ -6,7 +6,9 @@ import { fetchHomePagePromotionVideo } from '../api/apiCall';
 import { fetchSliderBelowSection } from '../api/apiCall';
 import { fetchHomeAboutUsSection } from '../api/apiCall';
 import { fetchHomeProducts } from '../api/apiCall';
+import { fetchActiveProducts } from '../api/apiCall';
 import Urls from "../constants/urls"; 
+import { Link } from 'react-router-dom';
 
 // import useScrollFadeUp from "../component/useScrollFadeUp.js"; // class for My-FadeIn-Up-Style
 
@@ -46,6 +48,27 @@ const Home = () => {
 
     /// ============================================================== API Call Area ========================================================= ///
 
+    /// ------------------- Home Page Active Product list API Call ----------- //
+    const [activeProducts, setActiveProducts] = useState([]);
+    // const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const getProducts = async () => {
+        try {
+            const data = await fetchActiveProducts();
+            setActiveProducts(data);
+            console.log('Home Page Active Product List : ', data);
+        } catch (error) {
+            console.error('Failed to fetch products:', error);
+        } finally {
+            setLoading(false);
+        }
+        };
+
+        getProducts();
+    }, []);
+
+    // if (loading) return <p>Loading products...</p>;
 
     /// ------------------- Home Products API Call --------------------------- ///
     useEffect(() => {
@@ -245,7 +268,8 @@ const Home = () => {
                                             {/* <p className="feature-one__text">Delta LPG always try to give you a good product for your safety.</p> */}
                                             <p className="feature-one__text">{sliderBelowSectionData?.description_01}</p>
                                             <div className="feature-one__read-more">
-                                                <a href="/about" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a>
+                                                {/* <a href="/about" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a> */}
+                                                <Link to="/about"> Read More <i className="fa fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -267,13 +291,14 @@ const Home = () => {
                                             {/* <p className="feature-one__text">Delta LPG strive to deliver professional work of the highest quality.</p> */}
                                             <p className="feature-one__text">{sliderBelowSectionData?.description_02}</p>
                                             <div className="feature-one__read-more">
-                                                <a href="/about" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a>
+                                                {/* <a href="/about" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a> */}
+                                                <Link to="/about"> Read More <i className="fa fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 {/*Feature One Single End*/}
-                                {/* -------------------------------- Feature One Single Start --------------------------*/}
+                                {/* -------------------------------- Feature One Single Start -9999-------------------------*/}
                                 <div className="col-xl-4 col-lg-4 my-fadeIn-up-style-three" data-wow-delay="300ms">
                                     <div className="feature-one__single">
                                         <div className="feature-one__top">
@@ -289,8 +314,9 @@ const Home = () => {
                                             {/* <p className="feature-one__text">If you want to know the cost of your service, mail to us. </p> */}
                                             <p className="feature-one__text">{sliderBelowSectionData?.description_03}</p>
                                             <div className="feature-one__read-more">
-                                                <a href="/about" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a>
+                                                {/* <a href="/about" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a> */}
                                                 {/* <a href="/about">About </a> */}
+                                                <Link to="/about"> Read More <i className="fa fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -480,7 +506,7 @@ const Home = () => {
                         </div>
                         <div className="services-one__bottom">
                             <div className="row">
-                                {/* ------------------------- Product One Single Start --------------------------------- */}
+                                {/* ------------------------- Product One Single Start 999 --------------------------------- */}
 
                                 <div className="col-xl-4 col-lg-4 my-fadeIn-up-style" data-wow-delay="100ms">
 
@@ -491,7 +517,14 @@ const Home = () => {
                                             {/*<img src="assets/images/services/services-1-1.jpg" alt="">*/}
                                             {/* <img src="src/assets/images/services/product_12_kg.jpg" alt=""/> */}
 
-                                            {homeProductsData && (
+                                            {activeProducts.length > 1 && (
+                                                <img
+                                                src={`${Urls.baseUrl}${activeProducts[0].product_img}`}
+                                                alt={activeProducts[0].product_name}
+                                                />
+                                            )}
+
+                                            {/* {homeProductsData && (
                                                 <>
                                                     <img
                                                     src={`${Urls.baseUrl}${homeProductsData.product_1_image}`}
@@ -499,7 +532,7 @@ const Home = () => {
                                                     width="150"
                                                     />
                                                 </>
-                                            )}
+                                            )} */}
 
                                         </div>
                                         <div className="services-one__content">
@@ -508,7 +541,8 @@ const Home = () => {
                                                 <img src="src/assets/images/shapes/fire_icon_40.png" alt=""/>
                                             </div>
                                             {/* <h3 className="services-one__title"><a href="single-play-roofing.html">12 kg LP Gas</a></h3> */}
-                                             <h3 className="services-one__title"><a href="single-play-roofing.html">{homeProductsData?.product_1_name}</a></h3>
+                                             {/* <h3 className="services-one__title"><a href="single-play-roofing.html">{homeProductsData?.product_1_name}</a></h3> */}
+                                             <h3 className="services-one__title"><a href="single-play-roofing.html">{activeProducts[0]?.product_name}</a></h3>
                                             {/*<p className="services-one__text">Nulla commodo dolor massa, vel pellen esque nulla congue quis.</p>*/}
                                             <div className="services-one__read-more">
                                                 {/* <a href="order_now_12kg.html">Read More <i className="fa fa-arrow-right"></i></a>*/}
@@ -526,7 +560,17 @@ const Home = () => {
                                             {/*<img src="assets/images/services/services-1-2.jpg" alt="">*/}
                                             {/* <img src="src/assets/images/services/product_35_kg.jpg" alt=""/> */}
 
-                                            {homeProductsData && (
+                                            {activeProducts.length > 1 && (
+                                                <img
+                                                src={`${Urls.baseUrl}${activeProducts[1].product_img}`}
+                                                alt={activeProducts[1].product_name}
+                                                />
+                                            )}
+
+
+
+
+                                            {/* {homeProductsData && (
                                                 <>
                                                     <img
                                                     src={`${Urls.baseUrl}${homeProductsData.product_2_image}`}
@@ -534,7 +578,8 @@ const Home = () => {
                                                     width="150"
                                                     />
                                                 </>
-                                            )}
+                                            )} */}
+
                                         </div>
                                         <div className="services-one__content">
                                             <div className="services-one__icon_design_2">
@@ -542,7 +587,11 @@ const Home = () => {
                                                 <img src="src/assets/images/shapes/fire_icon_40.png" alt=""/>
                                             </div>
                                             {/* <h3 className="services-one__title"><a href="modified-roofing.html">33 kg LP Gas</a></h3> */}
-                                            <h3 className="services-one__title"><a href="single-play-roofing.html">{homeProductsData?.product_2_name}</a></h3>
+
+                                            {/* <h3 className="services-one__title"><a href="single-play-roofing.html">{homeProductsData?.product_2_name}</a></h3> */}
+                                            {/* <h3 className="services-one__title"><a href="single-play-roofing.html">{activeProducts[1]?.product_name}</a></h3> */}
+                                            <h3 className="services-one__title"><a href="single-play-roofing.html">{activeProducts[1]?.product_name}</a></h3>
+
                                             {/*<p className="services-one__text">Nulla commodo dolor massa, vel pellen esque nulla congue quis.</p>*/}
                                             <div className="services-one__read-more">
                                                 {/* <a href="order_now_33kg.html">Read More <i className="fa fa-arrow-right"></i></a> */}
@@ -560,7 +609,16 @@ const Home = () => {
                                             {/*<img src="assets/images/services/services-1-2.jpg" alt="">*/}
                                             {/* <img src="src/assets/images/services/product_45_kg.jpg" alt=""/> */}
 
-                                            {homeProductsData && (
+                                            {activeProducts.length > 1 && (
+                                                <img
+                                                src={`${Urls.baseUrl}${activeProducts[2].product_img}`}
+                                                alt={activeProducts[2].product_name}
+                                                />
+                                            )}
+
+
+
+                                            {/* {homeProductsData && (
                                                 <>
                                                     <img
                                                     src={`${Urls.baseUrl}${homeProductsData.product_3_image}`}
@@ -568,7 +626,9 @@ const Home = () => {
                                                     width="150"
                                                     />
                                                 </>
-                                            )}
+                                            )} */}
+
+
                                         </div>
                                         <div className="services-one__content">
                                             <div className="services-one__icon_design_2">
@@ -576,7 +636,8 @@ const Home = () => {
                                                 <img src="src/assets/images/shapes/fire_icon_40.png" alt=""/>
                                             </div>
                                             {/* <h3 className="services-one__title"><a href="modified-roofing.html">45 kg LP Gas</a></h3> */}
-                                            <h3 className="services-one__title"><a href="single-play-roofing.html">{homeProductsData?.product_3_name}</a></h3>
+                                            {/* <h3 className="services-one__title"><a href="single-play-roofing.html">{homeProductsData?.product_3_name}</a></h3> */}
+                                            <h3 className="services-one__title"><a href="single-play-roofing.html">{activeProducts[2]?.product_name}</a></h3>
                                             {/*<p className="services-one__text">Nulla commodo dolor massa, vel pellen esque nulla congue quis.</p>*/}
                                             <div className="services-one__read-more">
                                                 {/* <a href="order_now_33kg.html">Read More <i className="fa fa-arrow-right"></i></a> */}

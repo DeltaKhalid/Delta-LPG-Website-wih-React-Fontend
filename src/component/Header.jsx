@@ -66,7 +66,7 @@ const Header = () => {
               <div className="main-header__top-menu-box">
                 <ul className="list-unstyled main-header__top-menu">
                   {/* <li><a href="#">Our Faqs</a></li> */}
-                  <li><Link to="/faqs" >Our Faqs</Link></li>
+                  <li><Link to="/faqs" >Faqs</Link></li>
                   {/* <li><a href="/contact">Contact</a></li> */}
                   <li><Link to="/contact" >Contact</Link></li>
                 </ul>
@@ -131,7 +131,7 @@ const Header = () => {
                     </li>
 
                     <li className={`dropdown ${isActive('/about') ? 'active-menu' : ''}`}>
-                      <Link to="/about">About</Link>
+                      <Link to="/about">About Us</Link>
                       <ul className="border-top-2px">
                         <li className={`${isActive('/mission-vision') ? 'active-menu' : ''}`}>
                           <Link to="/mission-vision">Mission & Vision</Link>
@@ -177,7 +177,7 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="main-menu__btn-box">
-                  <Link to="/order-now" className="thm-btn main-menu__btn">
+                  <Link to="/shop-now" className="thm-btn main-menu__btn">
                     <i className="fa fa-arrow-right"></i> Order Now
                   </Link>
                 </div>

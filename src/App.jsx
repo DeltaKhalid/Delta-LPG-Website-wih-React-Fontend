@@ -22,6 +22,10 @@ import Faq from './pages/Faq';
 import AmirulHaque from './pages/about/AmirulHaque';
 import MustafaHaider from './pages/about/MustafaHaider';
 import ContactPage2 from './pages/ContactPage2';
+import ShopNow from './pages/order/ShopNow';
+import AddToCart from './pages/order/AddToCart';
+import CartAllPage from './pages/order/CartAllPage';
+import BuyNow from './pages/order/BuyNow';
 
 const App = () => {
   return (
@@ -47,6 +51,12 @@ const App = () => {
 
         {/* --- Order of Product --- */}
         <Route path='/product-list' element={<ProductsList/>}/>
+        <Route path='/shop-now' element={<ShopNow/>}/>
+        {/* --- Order Now Page --- */}
+        <Route path='/order-now' element={<OrderNow/>}/>
+        <Route path='/add-to-cart' element={<AddToCart/>}/>
+        <Route path='/cart-all-show' element={<CartAllPage/>}/>
+        <Route path='/buy-now' element={<BuyNow/>}/>
 
         {/* --- Distribution Page --- */}
         <Route path='/distribution' element={<Distribution/>}/>
@@ -58,8 +68,7 @@ const App = () => {
         {/* --- API test Page --- */}
         <Route path='/api-test' element={<ApiTest/>}/>
 
-        {/* --- Order Now Page --- */}
-        <Route path='/order-now' element={<OrderNow/>}/>
+
 
         {/* --- FAQ Page --- */}
         <Route path='/faqs' element={<Faq/>}/>
