@@ -52,6 +52,8 @@ class Urls {
   static faq = `${Urls.baseUrl}/faq-add/`;
   // --- Home Page Active Product list show --- //
   static activeProducts = `${Urls.baseUrl}/active-product-list/`;
+  // --- ShopNow page Product Show  --- //
+  static cylinderLpgProducts = `${Urls.baseUrl}/cylinder-lpg-products/`;
 
 
 

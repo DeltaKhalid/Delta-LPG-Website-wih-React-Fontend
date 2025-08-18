@@ -81,5 +81,17 @@ export const fetchFaqData = async () => {
 export const fetchActiveProducts = async () => {
   return await networkCallRequest(Urls.activeProducts);
 };
+// --- ShopNow page Products show --- //
+// export const fetchCylinderLpgProducts = async () => {
+//   const res = await networkCallRequest(Urls.cylinderLpgProducts);
+//   if (res && res.status && Array.isArray(res.data)) {
+//     return res.data;
+//   }
+//   return [];
+// };
+
+export const fetchCylinderLpgProducts = async () => {
+  return await networkCallRequest(Urls.cylinderLpgProducts);
+};
 
 

@@ -191,7 +191,7 @@
 .cart-right {
   flex: 1;
   border: 1px solid #ccc;
-  padding: 20px;
+  padding: 0px;
   background: white;
 }
 
@@ -234,10 +234,19 @@
 .cart-wrapper {
   max-width: 1200px;         /* Adjust based on your site layout */
   margin: 0 auto;            /* Centers it */
-  padding: 0 20px;           /* Adds left/right space */
+  padding: 0 10px;           /* Adds left/right space */
   display: flex;
   justify-content: space-between;
   gap: 40px;
+}
+
+.cart-wrapper_two {
+  max-width: 1100px;         /* Adjust based on your site layout */
+  margin: 10px 10px;            /* Centers it */
+  padding: 0 5px;           /* Adds left/right space */
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
 }
 
 @media (max-width: 768px) {

@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 import MobileMenu from './MobileMenu'
 import { fetchHeaderInfo } from '../api/apiCall';
 import Urls from '../constants/urls';
+import { FaShoppingCart } from "react-icons/fa";
 
 
 const Header = () => {
@@ -91,7 +92,9 @@ const Header = () => {
 
                   {/* --- Instagram Link --- */}
                   {/* <a href="#"><i className="fab fa-instagram"></i></a> */}
-                  <a href={headerData.instagram_link} target="_blank"><i className="fab fa-instagram"></i></a>
+                  {/* <a href={headerData.instagram_link} target="_blank"><i className="fab fa-instagram"></i></a> */}
+                  {/* <a href={headerData.instagram_link} target="_blank"><i className="fas fa-shopping-cart"></i></a> */}
+                  <Link to="/cart-all-show"><FaShoppingCart /></Link>
                 </div>
               </div>
             </div>
