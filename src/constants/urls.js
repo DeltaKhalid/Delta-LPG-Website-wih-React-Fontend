@@ -54,6 +54,8 @@ class Urls {
   static activeProducts = `${Urls.baseUrl}/active-product-list/`;
   // --- ShopNow page Product Show  --- //
   static cylinderLpgProducts = `${Urls.baseUrl}/cylinder-lpg-products/`;
+    // --- Order Create (POST API) --- //
+  static createOrder = `${Urls.baseUrl}/order-create/`;
 
 
 

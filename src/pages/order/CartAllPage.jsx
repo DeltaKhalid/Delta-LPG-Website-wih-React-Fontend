@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import emptyCartImg from '../../assets/images/backgrounds/cart_empty_img.png'; // your uploaded image
-// import emptyCartImg from '..'; // your uploaded image
+import emptyCartImg from "../../assets/images/backgrounds/empty_cart.png";
+import { createOrder } from "../../api/apiCall"; // ✅ import API function
 
 export default function CartPage() {
   const { cartItems, setCartItems, removeFromCart, clearCart } = useCart();
@@ -13,6 +13,9 @@ export default function CartPage() {
     phone: "",
     address: "",
   });
+``
+  const [loading, setLoading] = useState(false);
+  const [orderResponse, setOrderResponse] = useState(null);
 
   // Update quantity
   const handleQtyChange = (index, delta) => {
@@ -37,106 +40,87 @@ export default function CartPage() {
   };
 
   // Submit form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Order Submitted:", { ...formData, cartItems, grandTotal });
-    alert("Order submitted successfully!");
-    setFormData({ name: "", phone: "", address: "" });
-    clearCart(); // Optional: clear cart after submit
+    setLoading(true);
+
+    // Prepare payload for API
+    const orderPayload = {
+      customer_name: formData.name,
+      customer_phn: formData.phone,
+      customer_add: formData.address,
+      products: cartItems.map((item) => ({
+        product_name: item.title, // cart uses "title"
+        product_price: item.price.toString(), // ensure string like your API
+        quantity: item.quantity,
+      })),
+    };
+
+    try {
+      const response = await createOrder(orderPayload); // ✅ API Call
+      setOrderResponse(response);
+
+      alert("Order submitted successfully!");
+      clearCart(); // clear cart after success
+      setFormData({ name: "", phone: "", address: "" });
+    } catch (error) {
+      console.error("Order creation failed:", error);
+      alert("Failed to submit order!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   ///====================================== cart empty text with image ===================================== ///
   if (cartItems.length === 0) {
-  return (
-
-    <div
-      className="cart-wrapper"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center", // vertical center
-        alignItems: "center",     // horizontal center
-        minHeight: "100vh",       // full height of screen
-        textAlign: "center",
-        padding: "20px",
-      }}
-    >
-      <img
-        src={emptyCartImg}
-        alt="Empty Cart"
-        style={{ width: "150px", marginBottom: "20px" }}
-      />
-      <h2>
-        Your Cart is <span style={{ color: "red" }}>Empty!</span>
-      </h2>
-      <p>Must add items on the cart before you proceed to check out.</p>
-      <Link
-        to="/shop-now"
+    return (
+      <div
+        className="cart-wrapper"
         style={{
-          display: "inline-block",
-          marginTop: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#007bff",
-          color: "#fff",
-          borderRadius: "5px",
-          textDecoration: "none",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "70vh",
+          textAlign: "center",
+          padding: "20px",
         }}
       >
-        Go back to Shop
-      </Link>
-    </div>
-
-
-    // <div className="cart-wrapper" style={{ textAlign: "center", padding: "50px 20px" }}>
-    //   <img 
-    //     src={emptyCartImg} 
-    //     alt="Empty Cart" 
-    //     style={{ width: "150px", marginBottom: "20px" }} 
-    //   />
-    //   <h2>
-    //     Your Cart is <span style={{ color: "red" }}>Empty!</span>
-    //   </h2>
-    //   <p>Must add items on the cart before you proceed to check out.</p>
-    //   <Link 
-    //     to="/shop-now" 
-    //     style={{ 
-    //       display: "inline-block",
-    //       marginTop: "20px",
-    //       padding: "10px 20px",
-    //       backgroundColor: "#007bff",
-    //       color: "#fff",
-    //       borderRadius: "5px",
-    //       textDecoration: "none"
-    //     }}
-    //   >
-    //     Go back to Shop
-    //   </Link>
-    // </div>
-
-
-  );
-}
-
-  // if (cartItems.length === 0) {
-  //   return (
-  //     <div className="cart-wrapper ">
-  //       <div style={{ padding: "20px" }}>
-  //         <h2>Your cart is empty</h2>
-  //         <Link to="/shop-now">Go back to Shop</Link>
-  //       </div>
-        
-  //     </div>
-
-  //   );
-  // }
+        <img
+          src={emptyCartImg}
+          alt="Empty Cart"
+          style={{ width: "150px", marginBottom: "20px" }}
+        />
+        <h2>
+          Your Cart is <span style={{ color: "red" }}>Empty!</span>
+        </h2>
+        <p>Must add items on the cart before you proceed to check out.</p>
+        <Link
+          to="/shop-now"
+          style={{
+            display: "inline-block",
+            marginTop: "20px",
+            padding: "10px 20px",
+            backgroundColor: "#007bff",
+            color: "#fff",
+            borderRadius: "5px",
+            textDecoration: "none",
+          }}
+        >
+          Go back to Shop
+        </Link>
+      </div>
+    );
+  }
 
   /// ===================================================== Return Area 
   return (
     <div className="cart-page-container">
       <div className="cart-wrapper">
         <div className="cart-wrapper_two">
+
+          {/* -------------------------------------- Cart Left ------------------ */}
           <div className="cart-left">
-            
             <div className="cart-header-row">
               <h6>Product</h6>
               <h6>Price</h6>
@@ -171,10 +155,8 @@ export default function CartPage() {
               </div>
             ))}
 
+            {/* ---------------------------------- Submit Button -------------------------------------- */}
             <div className="">
-              {/* <h1> Submit Form. </h1> */}
-
-              {/* ✅ Order Form from BuyNow */}
               <form className="order-form" onSubmit={handleSubmit}>
                 <h3>Order Now</h3>
 
@@ -207,13 +189,22 @@ export default function CartPage() {
                   required
                 ></textarea>
 
-                <button type="submit" className="submit-btn">
-                  SUBMIT
+                <button type="submit" className="submit-btn" disabled={loading}>
+                  {loading ? "Submitting..." : "SUBMIT"}
                 </button>
               </form>
             </div>
+
+            {/* ✅ Show API Response (Optional) */}
+            {orderResponse && (
+              <div style={{ marginTop: "20px", padding: "10px", background: "#e0ffe0" }}>
+                <h4>Server Response:</h4>
+                <pre>{JSON.stringify(orderResponse, null, 2)}</pre>
+              </div>
+            )}
           </div>
 
+          {/* ---------------------------------- Cart Right ----------------------------------------- */}
           <div className="cart-right">
             <h3>Order Summary</h3>
             <div>
@@ -225,11 +216,289 @@ export default function CartPage() {
               <span>{grandTotal.toLocaleString()} ৳</span>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import { useCart } from "../../context/CartContext";
+// import { FaTrashAlt } from "react-icons/fa";
+// import { Link } from "react-router-dom";
+// import emptyCartImg from '../../assets/images/backgrounds/empty_cart.png'; // your uploaded image
+
+
+// export default function CartPage() {
+//   const { cartItems, setCartItems, removeFromCart, clearCart } = useCart();
+
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     phone: "",
+//     address: "",
+//   });
+
+//   // Update quantity
+//   const handleQtyChange = (index, delta) => {
+//     const updatedCart = [...cartItems];
+//     const item = updatedCart[index];
+//     const newQty = item.quantity + delta;
+
+//     if (newQty > 0) {
+//       item.quantity = newQty;
+//       item.subtotal = item.price * newQty;
+//       setCartItems(updatedCart); // update context
+//     }
+//   };
+
+//   // Calculate totals
+//   const grandTotal = cartItems.reduce((sum, item) => sum + item.subtotal, 0);
+
+//   // Handle form input changes
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   // Submit form
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log("Order Submitted:", { ...formData, cartItems, grandTotal });
+//     alert("Order submitted successfully!");
+//     setFormData({ name: "", phone: "", address: "" });
+//     clearCart(); // Optional: clear cart after submit
+//   };
+
+//   ///====================================== cart empty text with image ===================================== ///
+//   if (cartItems.length === 0) {
+//   return (
+
+//     <div
+//       className="cart-wrapper"
+//       style={{
+//         display: "flex",
+//         flexDirection: "column",
+//         justifyContent: "center", // vertical center
+//         alignItems: "center",     // horizontal center
+//         minHeight: "70vh",       // full height of screen
+//         textAlign: "center",
+//         padding: "20px",
+//       }}
+//     >
+//       <img
+//         src={emptyCartImg}
+//         alt="Empty Cart"
+//         style={{ width: "150px", marginBottom: "20px" }}
+//       />
+//       <h2>
+//         Your Cart is <span style={{ color: "red" }}>Empty!</span>
+//       </h2>
+//       <p>Must add items on the cart before you proceed to check out.</p>
+//       <Link
+//         to="/shop-now"
+//         style={{
+//           display: "inline-block",
+//           marginTop: "20px",
+//           padding: "10px 20px",
+//           backgroundColor: "#007bff",
+//           color: "#fff",
+//           borderRadius: "5px",
+//           textDecoration: "none",
+//         }}
+//       >
+//         Go back to Shop
+//       </Link>
+//     </div>
+
+
+//     // <div className="cart-wrapper" style={{ textAlign: "center", padding: "50px 20px" }}>
+//     //   <img 
+//     //     src={emptyCartImg} 
+//     //     alt="Empty Cart" 
+//     //     style={{ width: "150px", marginBottom: "20px" }} 
+//     //   />
+//     //   <h2>
+//     //     Your Cart is <span style={{ color: "red" }}>Empty!</span>
+//     //   </h2>
+//     //   <p>Must add items on the cart before you proceed to check out.</p>
+//     //   <Link 
+//     //     to="/shop-now" 
+//     //     style={{ 
+//     //       display: "inline-block",
+//     //       marginTop: "20px",
+//     //       padding: "10px 20px",
+//     //       backgroundColor: "#007bff",
+//     //       color: "#fff",
+//     //       borderRadius: "5px",
+//     //       textDecoration: "none"
+//     //     }}
+//     //   >
+//     //     Go back to Shop
+//     //   </Link>
+//     // </div>
+
+
+//   );
+// }
+
+//   // if (cartItems.length === 0) {
+//   //   return (
+//   //     <div className="cart-wrapper ">
+//   //       <div style={{ padding: "20px" }}>
+//   //         <h2>Your cart is empty</h2>
+//   //         <Link to="/shop-now">Go back to Shop</Link>
+//   //       </div>
+        
+//   //     </div>
+
+//   //   );
+//   // }
+
+//   /// ===================================================== Return Area 
+//   return (
+//     <div className="cart-page-container">
+//       <div className="cart-wrapper">
+//         <div className="cart-wrapper_two">
+
+//           {/* -------------------------------------- Cart Left ------------------ */}
+//           <div className="cart-left">
+            
+//             <div className="cart-header-row">
+//               <h6>Product</h6>
+//               <h6>Price</h6>
+//               <h6>Quantity</h6>
+//               <h6>Subtotal</h6>
+//               <h6>Stock</h6>
+//             </div>
+
+//             {cartItems.map((item, index) => (
+//               <div key={index} className="cart-item">
+//                 <div className="cart-product-info">
+//                   <img
+//                     src={item.image}
+//                     alt={item.title}
+//                     style={{ width: "80px", height: "80px", objectFit: "cover" }}
+//                   />
+//                   <span>{item.title}</span>
+//                 </div>
+//                 <div>{item.price.toLocaleString()} ৳</div>
+
+//                 <div className="cart-qty">
+//                   <button onClick={() => handleQtyChange(index, -1)}>-</button>
+//                   <input type="text" value={item.quantity} readOnly />
+//                   <button onClick={() => handleQtyChange(index, 1)}>+</button>
+//                 </div>
+
+//                 <div>{item.subtotal.toLocaleString()} ৳</div>
+//                 <div>{item.stock || "Available"}</div>
+//                 <div onClick={() => removeFromCart(item.title, item.price)}>
+//                   <FaTrashAlt />
+//                 </div>
+//               </div>
+//             ))}
+
+
+
+
+
+//             {/* ---------------------------------- Submit Button -------------------------------------- */}
+//             <div className="">
+//               {/* <h1> Submit Form. </h1> */}
+
+//               {/* ✅ Order Form from BuyNow */}
+//               <form className="order-form" onSubmit={handleSubmit}>
+//                 <h3>Order Now</h3>
+
+//                 <label>Name</label>
+//                 <input
+//                   type="text"
+//                   name="name"
+//                   placeholder="Enter your name"
+//                   value={formData.name}
+//                   onChange={handleChange}
+//                   required
+//                 />
+
+//                 <label>Phone Number</label>
+//                 <input
+//                   type="tel"
+//                   name="phone"
+//                   placeholder="Enter your phone number"
+//                   value={formData.phone}
+//                   onChange={handleChange}
+//                   required
+//                 />
+
+//                 <label>Address</label>
+//                 <textarea
+//                   name="address"
+//                   placeholder="Enter your address"
+//                   value={formData.address}
+//                   onChange={handleChange}
+//                   required
+//                 ></textarea>
+
+//                 <button type="submit" className="submit-btn">
+//                   SUBMIT
+//                 </button>
+//               </form>
+//             </div>
+//           </div>
+
+//             {/* ---------------------------------- Cart Right ----------------------------------------- */}
+//             <div className="cart-right">
+//               <h3>Order Summary</h3>
+//               <div>
+//                 <span>Subtotal:</span>
+//                 <span>{grandTotal.toLocaleString()} ৳</span>
+//               </div>
+//               <div>
+//                 <strong>Total:</strong>
+//                 <span>{grandTotal.toLocaleString()} ৳</span>
+//               </div>
+//            </div>
+
+
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 
 

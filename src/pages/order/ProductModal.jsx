@@ -12,7 +12,7 @@ const PopupModal = ({ show, onClose, product }) => {
     const [quantity, setQuantity] = useState(1);
     const [mainImage, setMainImage] = useState('');
 
-    // Reset modal data when product changes
+    // Reset modal data when product changes /// test project push
 useEffect(() => {
     if (product) {
         setMainImage(`${Urls.baseUrl}${product.product_image}`);
