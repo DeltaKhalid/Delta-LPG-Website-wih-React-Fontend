@@ -2,19 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  plugins: [react()],
-  server: {
-    // Fix for React Router's refresh 404 issue
-    historyApiFallback: true,
-  }
+	plugins: [react()],
+	server: {
+		historyApiFallback: true,
+	}
 })
-
-
-
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
-
-// // https://vite.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
