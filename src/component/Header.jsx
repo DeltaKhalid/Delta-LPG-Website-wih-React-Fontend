@@ -17,6 +17,7 @@ const Header = () => {
   /// ================================================= Header Info API Call ================================================= ///
   const [headerData, setHeaderData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const safeHeaderData = headerData ?? {}
 
   useEffect(() => {
     const getHeaderInfo = async () => {
@@ -34,9 +35,6 @@ const Header = () => {
     getHeaderInfo();
   }, []);
 
-  if (loading) return <p>Loading header info...</p>;
-
-
   /// ================================================= Main Return Wrapper ================================================== ///
   return (
     <div className="menu_height">
@@ -52,7 +50,7 @@ const Header = () => {
                   <i className="icon"><span className="fa fa-clock"></span></i>
                   {/* <div className="text"><p>Sat to Thu: 09:00 am to 05:00 pm</p></div> */}
                   {/* <div className="text"><p>Office Time: {headerData.office_time}</p></div> */}
-                  <div className="text"><p>{headerData.office_time}</p></div>
+                  <div className="text"><p>{safeHeaderData.office_time || 'Sat to Thu: 09:00 am to 05:00 pm'}</p></div>
                 </li>
                 {/* --- Email Address --- */}
                 <li>
@@ -77,18 +75,18 @@ const Header = () => {
                 <div className="main-header__top-social">
                   {/* --- Facebook Link --- */}
                   {/* <a href="#"><i className="fab fa-facebook-square"></i></a> */}
-                  <a href={headerData.facebook_link} target="_blank"><i className="fab fa-facebook-square"></i></a>
+                  <a href={safeHeaderData.facebook_link || '#'} target="_blank" rel="noreferrer"><i className="fab fa-facebook-square"></i></a>
                   
                   {/* --- Twitter Link --- */}
                   {/* <a href="#"><i className="fab fa-twitter"></i></a> */}
 
                   {/* --- LinkedIn Link --- */}
                   {/* <a href="#"><i className="fab fa-linkedin"></i></a> */}
-                  <a href={headerData.linkedin_link} target="_blank"><i className="fab fa-linkedin"></i></a>
+                  <a href={safeHeaderData.linkedin_link || '#'} target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i></a>
 
                   {/* --- Print rest Link --- */}
                   {/* <a href="#"><i className="fab fa-youtube"></i></a> */}
-                  <a href={headerData.youtube_link} target="_blank"><i className="fab fa-youtube"></i></a>
+                  <a href={safeHeaderData.youtube_link || '#'} target="_blank" rel="noreferrer"><i className="fab fa-youtube"></i></a>
 
                   {/* --- Instagram Link --- */}
                   {/* <a href="#"><i className="fab fa-instagram"></i></a> */}
@@ -111,17 +109,21 @@ const Header = () => {
                   <div className="main-header__logo logo_padding_top">
                     {/* <Link to="/"><img src="../src/assets/images/resources/delta_header_logo_170_91.png" alt="Delta Logo" /></Link> */}
                     <Link to="/">
-                      <img
-                          src={`${Urls.baseUrl}${headerData.logo}`} // *** mush import Urls from '../constants/urls';
-                          // alt={Array.from(productMap.values())[2].product_name}
-                          alt='Logo is Loading...'
-                          // style={{
-                          // width: '100%',
-                          // maxWidth: '300px',
-                          // height: 'auto',
-                          // borderRadius: '5px',
-                          // }}
-                      />
+                      {safeHeaderData.logo ? (
+                        <img
+                            src={`${Urls.baseUrl}${safeHeaderData.logo}`} // *** mush import Urls from '../constants/urls';
+                            // alt={Array.from(productMap.values())[2].product_name}
+                            alt='Delta Logo'
+                            // style={{
+                            // width: '100%',
+                            // maxWidth: '300px',
+                            // height: 'auto',
+                            // borderRadius: '5px',
+                            // }}
+                        />
+                      ) : (
+                        <span>Delta LPG</span>
+                      )}
                     </Link>
                   </div>
 

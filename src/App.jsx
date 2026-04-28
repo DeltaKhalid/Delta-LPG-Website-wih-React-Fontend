@@ -4,7 +4,7 @@ import React from 'react';
 import Home from './pages/Home';
 import About from './pages/about/About';
 import Contact from './pages/Contact';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import BoardOfDirectors from './pages/about/BoardOfDirectors';
 import MissionVision from './pages/about/MissionVision';
 import Cylinder from './pages/products/Cylinder';
@@ -29,7 +29,7 @@ import BuyNow from './pages/order/BuyNow';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       {/* --- Header with Menu --- */}
       <Header/>
       {/* --- All Page Routes ---- */}
@@ -76,7 +76,7 @@ const App = () => {
       </Routes>
       {/* --- Footer --- */}
       <Footer/>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

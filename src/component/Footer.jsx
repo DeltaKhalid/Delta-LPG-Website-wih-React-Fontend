@@ -15,6 +15,7 @@ const Footer = () => {
     // Footer data state
     const [footerData, setFooterData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const safeFooterData = footerData ?? {};
 
 
 
@@ -119,20 +120,20 @@ const Footer = () => {
                                 <div className="footer-widget__column footer-widget__explore clearfix">
                                     <h3 className="footer-widget__title">Delta LPG</h3>
                                     <div class="custom-underline "></div>
-                                    <p className="footer-widget__contact-text ">{footerData?.footer_text || "No footer text available."}</p>
+                                    <p className="footer-widget__contact-text ">{safeFooterData.footer_text || "No footer text available."}</p>
                                      <div className="site-footer__social ">
                                         {/* <a href={headerData.facebook_link} target="_blank"><i className="fab fa-facebook-square"></i></a> */}
-                                        <a href={footerData.facebook_link} target="_blank"><i className="fab fa-facebook"></i></a>
+                                        <a href={safeFooterData.facebook_link || '#'} target="_blank" rel="noreferrer"><i className="fab fa-facebook"></i></a>
 
                                         {/* <a href="#"><i className="fab fa-linkedin"></i></a> */}
-                                        <a href={footerData.youtube_link} target="_blank"><i className="fab fa-youtube"></i></a>
+                                        <a href={safeFooterData.youtube_link || '#'} target="_blank" rel="noreferrer"><i className="fab fa-youtube"></i></a>
 
                                         {/* <a href="#"><i className="fab fa-linkedin"></i></a> */}
-                                        <a href={footerData.linkedin_link} target="_blank"><i className="fab fa-linkedin"></i></a>
+                                        <a href={safeFooterData.linkedin_link || '#'} target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i></a>
                                         
                                         {/* <a href="#"><i className="fab fa-pinterest-p"></i></a> */}
                                         {/* <a href="#"><i className="fab fa-instagram"></i></a> */}
-                                        <a href={footerData.instagram_link} target="_blank"><i className="fab fa-instagram"></i></a>
+                                        <a href={safeFooterData.instagram_link || '#'} target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
 
                                     </div>
 
@@ -209,7 +210,7 @@ const Footer = () => {
                                     <h3 className="footer-widget__title">Contact</h3>
                                     <div class="custom-underline"></div>
                                     <p className="footer-widget__contact-text">
-                                        {footerData.address}
+                                        {safeFooterData.address || 'Address is currently unavailable.'}
 
 
                                         {/* TK BHABAN (16TH FLOOR) <br />
@@ -222,7 +223,7 @@ const Footer = () => {
                                             <div className="text">
                                                 {/* <p><a href="mailto:info@deltalpg.com">info@deltalpg.com</a></p> */}
                                                 {/* <p className="footer-widget__contact-text">{footerData.footer_text}</p> */}
-                                                <p className="footer-widget__title">{footerData.email}</p>
+                                                <p className="footer-widget__title">{safeFooterData.email || 'info@deltalpg.com'}</p>
                                             </div>
                                         </li>
                                         <li className=" margin_top_10px">
@@ -230,7 +231,7 @@ const Footer = () => {
                                             <div className="text">
                                                 {/* <p><a href="tel:+880255011904">+880 255 011 904</a></p> */}
                                                 {/* <p className="site-footer__bottom-text">{footerData.phone_number}</p> */}
-                                                <p className="footer-widget__title">{footerData.phone_number}</p>
+                                                <p className="footer-widget__title">{safeFooterData.phone_number || '+880 255 011 901-3'}</p>
                                             </div>
                                         </li>
                                     </ul>
@@ -246,7 +247,7 @@ const Footer = () => {
                             <div className="col-xl-12">
                                 <div className="site-footer__bottom-inner">
                                     {/* <p className="site-footer__bottom-text">Copyright © 2025 Delta LPG</p> */}
-                                    <p className="site-footer__bottom-text">{footerData.footer_credits_text}</p>
+                                    <p className="site-footer__bottom-text">{safeFooterData.footer_credits_text || 'Copyright © Delta LPG'}</p>
                                 </div>
                             </div>
                         </div>

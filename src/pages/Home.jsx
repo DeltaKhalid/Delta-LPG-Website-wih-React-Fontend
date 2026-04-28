@@ -29,7 +29,7 @@ const Home = () => {
     /// ---------- Variables of Home page promotion video API Call --------- ///
     const [videoData, setVideoData] = useState(null);
     const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
 
     /// ---------- Variables of Class for Fade Animation ------------------- ///
     const ref = useRef();

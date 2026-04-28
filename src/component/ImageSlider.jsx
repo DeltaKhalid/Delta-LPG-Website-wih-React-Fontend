@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { fetchHomeSlider } from '../api/apiCall';
 import Urls from '../constants/urls';
+import Loader from './Loader';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -28,7 +29,7 @@ const ImageSlider = () => {
     getSliderImages();
   }, []);
 
-  if (loading) return <p>Loading slider...</p>;
+  if (loading) return <Loader label="" fullscreen={false} />;
 
   return (
     <div className="slider-container" style={{ width: '100%', height: '500px' }}>
