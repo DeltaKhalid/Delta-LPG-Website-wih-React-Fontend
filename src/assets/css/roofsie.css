@@ -3406,6 +3406,15 @@ ul {
 }
 
 /* Reticulation page box design */
+/* .reticulation_img_box_design {
+  position: relative;
+  display: block;
+  border: 1px solid #66C445;
+  border-radius: 10px;
+  box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+} */
+ /* Reticulation page box design */
 .reticulation_img_box_design {
   position: relative;
   display: block;
@@ -3413,6 +3422,12 @@ ul {
   border-radius: 10px;
   box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.08);
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .reticulation_img_box_design {
+    display: none;
+  }
 }
 
 

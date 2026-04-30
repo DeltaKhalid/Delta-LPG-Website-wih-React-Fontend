@@ -75,13 +75,13 @@ const Reticulation = () => {
             </div>
 
             {/* --- ============================================ section 3 =================================== --- */}
-            <section className="distribution_headline">
+            <section className="distribution_headline reticulation-mobile-hide-right-image-section">
                 {/* <div className="about-one__shape float-bob-x">
                     <img src="src/assets/images/shapes/about-one-shape.png" alt=""/>
                 </div> */}
                 <div className="container">
                     <div className="row">
-                        <div className="col-xl-6 col-md-12">
+                        <div className="col-xl-6 col-md-12 reticulation-mobile-image-column">
                             <div className="about-one__left">
                                 <div className="about-one__img-box wow slideInLeft" data-wow-delay="100ms"
                                 data-wow-duration="2500ms">
@@ -290,15 +290,39 @@ const Reticulation = () => {
                         </div>
                         
                         {/* image from Right */}
+                        <div className="col-xl-6 col-md-12 reticulation-mobile-image-column reticulation-mobile-hide-image-05">
+                            <div className="about-one__right">
+                                <div className="about-one__img-box wow slideInRight" data-wow-delay="100ms" data-wow-duration="2500ms">
+                                <div className="reticulation_img_box_design reticulation-hide-mobile-2nd-image">
+                                    <img src="src/assets/images/resources/reticulation_img_05.png" alt="" />
+                                </div>
+
+                                <div className="about-one__line">
+                                    <img src="src/assets/images/shapes/about-one-line.png" alt="" />
+                                </div>
+
+                                <div className="about-one__big-text">Delta LPG</div>
+                                </div>
+                            </div>
+                        </div>            
+
+
+
                         
-                        <div className="col-xl-6 col-md-12">
+                        {/* <div className="col-xl-6 col-md-12 reticulation-mobile-image-column reticulation-mobile-hide-image-05">
+                        
                             <div className="about-one__righ">
                                 <div className="about-one__img-box wow slideInRight" data-wow-delay="100ms"
                                 data-wow-duration="2500ms">
                                 
-                                    <div className="reticulation_img_box_design">
-                                        <img src="src/assets/images/resources/reticulation_img_05.png" alt=""/>
-                                    </div>
+                                    <div className="reticulation_img_box_design reticulation-hide-mobile-2nd-image">
+                                        {/* <div className="reticulation_img_box_design reticulation-hide-mobile-2nd-image">
+                                            <img src="src/assets/images/resources/reticulation_img_05.png" alt=""/>
+                                        </div> */}
+
+                                        <div className="reticulation_img_box_design">
+                                            <img src="src/assets/images/resources/reticulation_img_05.png" alt=""/>
+                                        </div>
                                 
                                     {/*<div className="about-one__img">
                                         <img src="assets/images/resources/reticulation_img_01.png" alt=""/>
@@ -330,12 +354,14 @@ const Reticulation = () => {
                                     <div className="about-one__big-text">Delta LPG</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         
                         
                         
                         
                         
+                    
+                    
                     </div>
                 </div>
             </section>
