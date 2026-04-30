@@ -5093,6 +5093,7 @@ textarea.form-control {
 
   /*background-color: #84db8454; /* Your background color */
   /*opacity: 0.5; /* Set opacity to make it transparent */
+  overflow: hidden;
   z-index: 1;
   /*background-color: #00000000;*/
 }

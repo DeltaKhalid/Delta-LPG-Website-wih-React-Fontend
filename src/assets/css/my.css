@@ -313,6 +313,10 @@ img {
   height: auto;
 }
 
+.site-footer {
+  overflow: hidden;
+}
+
 .feature-one__dot {
   display: none;
 }
