@@ -543,7 +543,7 @@ const Home = () => {
                                             {/*<p className="services-one__text">Nulla commodo dolor massa, vel pellen esque nulla congue quis.</p>*/}
                                             <div className="services-one__read-more">
                                                 {/* <a href="order_now_12kg.html">Read More <i className="fa fa-arrow-right"></i></a>*/}
-                                                <a href="/cylinder" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a>
+                                                <Link to="/cylinder">Read More <i className="fa fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -592,7 +592,7 @@ const Home = () => {
                                             {/*<p className="services-one__text">Nulla commodo dolor massa, vel pellen esque nulla congue quis.</p>*/}
                                             <div className="services-one__read-more">
                                                 {/* <a href="order_now_33kg.html">Read More <i className="fa fa-arrow-right"></i></a> */}
-                                                <a href="/cylinder" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a>
+                                                <Link to="/cylinder">Read More <i className="fa fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -638,7 +638,7 @@ const Home = () => {
                                             {/*<p className="services-one__text">Nulla commodo dolor massa, vel pellen esque nulla congue quis.</p>*/}
                                             <div className="services-one__read-more">
                                                 {/* <a href="order_now_33kg.html">Read More <i className="fa fa-arrow-right"></i></a> */}
-                                                <a href="/cylinder" target="_blank" rel="noopener noreferrer">Read More <i className="fa fa-arrow-right"></i></a>
+                                                <Link to="/cylinder">Read More <i className="fa fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>

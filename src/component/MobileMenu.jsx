@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import mobileMenuLogo from '../assets/images/resources/delta_header_logo_r__170_91.png';
 
 const menuItems = [
     { label: 'Home', to: '/' },
@@ -91,7 +92,7 @@ const MobileMenu = () => {
 
                 <div className="logo-box ">
                     <Link to="/" aria-label="logo image" onClick={handleCloseMenu}>
-                        <img src="src/assets/images/resources/delta_header_logo_170_91.png" width="170" height="90" alt="Logo" />
+                        <img src={mobileMenuLogo} width="170" height="90" alt="Logo" />
                     </Link>
                 </div>
 
