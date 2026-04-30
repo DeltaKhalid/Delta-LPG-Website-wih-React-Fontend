@@ -247,9 +247,6 @@ const Home = () => {
                 <section className="feature-one">
                     <div className="container">
                         <div className="feature-one__inner">
-                            <div className="feature-one__dot">
-                                <img src="assets/images/shapes/feature-one-dot.png" alt=""/>
-                            </div>
                             <div className="row">
                                 {/* --------------------------- Feature One Single Start --------------------------- */}
                                 <div className="col-xl-4 col-lg-4 my-fadeIn-up-style" data-wow-delay="100ms">

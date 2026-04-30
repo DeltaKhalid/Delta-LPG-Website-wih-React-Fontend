@@ -440,3 +440,37 @@
     font-size: 14px;
   }
 }
+
+@media (max-width: 480px) {
+  .product_name_field_min {
+    min-width: 0;
+  }
+
+  .cart-page,
+  .cart-page-container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .cart-wrapper,
+  .cart-wrapper_two {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .cart-item {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-product-info,
+  .cart-actions,
+  .cart-steps,
+  .quantity-controls,
+  .cart-qty {
+    flex-wrap: wrap;
+  }
+
+  .cart-right {
+    padding: 16px;
+  }
+}

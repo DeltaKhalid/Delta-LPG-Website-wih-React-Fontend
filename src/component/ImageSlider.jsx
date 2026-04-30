@@ -32,14 +32,19 @@ const ImageSlider = () => {
   if (loading) return <Loader label="" fullscreen={false} />;
 
   return (
-    <div className="slider-container" style={{ width: '100%', height: '500px' }}>
+    <div className="slider-container home-slider" style={{ width: '100%', height: '500px' }}>
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
+        className="home-slider__swiper"
         loop={true}
+        slidesPerView={1}
+        centeredSlides={false}
+        spaceBetween={0}
+        watchOverflow={true}
         autoplay={{ delay: 3000 }}
-        pagination={{ clickable: true }}
+        pagination={{ clickable: true, dynamicBullets: true }}
         navigation
-        style={{ height: '100%' }}
+        style={{ width: '100%', height: '100%' }}
       >
         {slides.map((slider, index) => (
           <SwiperSlide key={index}>
