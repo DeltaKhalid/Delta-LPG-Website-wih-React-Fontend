@@ -32,13 +32,26 @@
 
 @media only screen and (max-width: 768px) {
   .trust-company__left {
-    display: none;
+    display: block;
+    width: 100%;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .trust-company {
-    display: none;
+    display: block;
+    padding: 20px 0;
+    overflow: visible;
+  }
+  .trust-company__right {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .trust-company iframe,
+  .trust-company video,
+  .video_container iframe {
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -3139,7 +3152,7 @@ ul {
 .feature-one {
   position: relative;
   display: block;
-  padding: 0 0 27px;
+  padding: 0 0 5px;
   margin-top: -3px;
   z-index: 92;
 }
@@ -3368,7 +3381,7 @@ ul {
 .about-one {
   position: relative;
   display: block;
-  padding: 0 0 120px;
+  padding: 0 0 30px;
 }
 
 .about-one__shape {
@@ -3581,7 +3594,7 @@ ul {
 .services-one {
   position: relative;
   display: block;
-  padding: 120px 0 90px;
+  padding: 40px 0 10px;
   z-index: 1;
 }
 

@@ -484,13 +484,13 @@ img {
     display: none;
   }
 
-  .feature-one,
-  .about-one,
-  .services-one,
-  .faq-one,
-  .project-one,
-  .brand-one,
-  .testimonial-one,
+  .feature-one {
+    position: relative;
+    display: block;
+    padding: 0 0 5px;
+    margin-top: -3px;
+    z-index: 92;
+  }
   .blog-one,
   .contact-one,
   .trust-company,
@@ -1226,7 +1226,11 @@ img {
 /* --------------------------------------------------- Home Page Video of Youtube ----------------------- */
 @media (max-width: 768px) {
   .video_container {
-    display: none !important;
+    display: block !important;
+  }
+  .video_container iframe {
+    width: 100%;
+    height: auto;
   }
 }
 

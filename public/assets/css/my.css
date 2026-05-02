@@ -1219,7 +1219,11 @@ img {
 /* --------------------------------------------------- Home Page Video of Youtube ----------------------- */
 @media (max-width: 768px) {
   .video_container {
-    display: none !important;
+    display: block !important;
+  }
+  .video_container iframe {
+    width: 100%;
+    height: auto;
   }
 }
 
