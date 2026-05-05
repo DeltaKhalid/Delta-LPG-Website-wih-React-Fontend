@@ -120,7 +120,7 @@ const MissionVision = () => {
                     </p>
 
                     <div className="section-title text-left">
-                      <h2 className="section-title__title wow fadeInUp" data-wow-delay="100ms">
+                      <h2 className="section-title__title_two wow fadeInUp" data-wow-delay="100ms">
                         {missionVisionData.title2}
                       </h2>
                     </div>

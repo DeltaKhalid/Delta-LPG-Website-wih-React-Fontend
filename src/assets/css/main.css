@@ -30,6 +30,14 @@
     margin-top: 50px;
 }
 
+.margin-bottom-50 {
+    margin-bottom: 50px;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
 /* Base styles for the video container (apply to all screen sizes) */
 .video_container iframe {
   width: 100%;  /* Set width to 100% for responsiveness */
@@ -15456,7 +15464,9 @@ img {
 .mob-nav-link{flex:1 1 auto;display:flex;align-items:center;min-height:46px;padding:10px 0;font-size:16px;font-weight:500;color:#1c1b1f!important;text-decoration:none!important;transition:color 150ms ease}
 .mob-nav-link:hover,.mob-nav-link:focus{color:#1f8c3b!important;text-decoration:none!important}
 .mob-nav-link--child{min-height:40px;padding:8px 0;font-size:15px!important;font-weight:400}
+.mob-nav-link--toggle{background:none;border:none;cursor:pointer;text-align:left;outline:none}
 .mob-nav-item--active>.mob-nav-row>.mob-nav-link{color:#1f8c3b!important;font-weight:700}
+.mob-nav-item--active>.mob-nav-link{color:#1f8c3b!important;font-weight:700}
 .mob-nav-toggle{flex:0 0 auto;width:32px;height:32px;border:none;border-radius:50%;background:#1f8c3b;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 180ms ease,background 150ms ease}
 .mob-nav-toggle.expanded{transform:rotate(180deg);background:#111}
 .mob-subnav-list{list-style:none;margin:0 0 8px;padding:0 0 0 14px}

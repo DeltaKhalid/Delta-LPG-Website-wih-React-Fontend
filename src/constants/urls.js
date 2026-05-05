@@ -1,10 +1,13 @@
 // src/constants/urls.js
 
 class Urls {
-//   static baseUrl = 'http://192.168.1.170:4000/api';
   static baseUrl = (
     import.meta.env.VITE_API_BASE_URL || 'https://api.seacom.com.bd/api'
   ).replace(/\/+$/, '');
+
+  // static baseUrl = 'http://192.168.1.170:4000/api';
+  // static baseUrl = 'http://127.0.0.1:8000/api';
+
   static apiOrigin = Urls.baseUrl.replace(/\/api$/, '');
 
   static buildMediaUrl(path) {

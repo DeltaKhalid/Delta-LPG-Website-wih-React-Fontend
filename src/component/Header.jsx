@@ -141,12 +141,21 @@ const Header = () => {
 
                   <ul className="main-menu__list">
                     <li className={`dropdown megamenu ${isActive('/') ? 'active-menu' : ''}`}>
-                      <Link to="/">Home</Link>
+                      <Link to="/">Home 2</Link>
                     </li>
 
                     <li className={`dropdown ${isActive('/about') ? 'active-menu' : ''}`}>
-                      <Link to="/about">About Us</Link>
+                      {/* <Link to="/about">About Us</Link> */}
+                      <a href="#">About Us</a>
                       <ul className="border-top-2px">
+
+                        <li className={`${isActive('/about') ? 'active-menu' : ''}`}>
+                          <Link to="/about">About Us</Link>
+                        </li>
+
+
+
+
                         <li className={`${isActive('/mission-vision') ? 'active-menu' : ''}`}>
                           <Link to="/mission-vision">Mission & Vision</Link>
                         </li>

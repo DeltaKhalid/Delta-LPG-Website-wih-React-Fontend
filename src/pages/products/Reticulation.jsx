@@ -67,6 +67,15 @@ const Reticulation = () => {
               <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms">
                 {reticulationData.section_headline_01}
               </p>
+
+
+
+
+
+          
+
+
+
               <div className="section-title-shape-1">
                 <img src={fireIcon} alt="" />
               </div>
@@ -105,8 +114,15 @@ const Reticulation = () => {
             </div>
 
             {/* Text right */}
-            <div className="col-xl-6 col-md-12">
+            <div className="col-xl-6 col-md-12 ">
               <div className="about-one__right">
+                {/* ------------------------------------------ Headline of reticulation system ---------------- */}
+                <div className="reticulation_page_title_design_two">
+                  <h5 className="reticulation_page_title_design wow fadeInUp" data-wow-delay="100ms">
+                    Reticulated system:
+                  </h5>
+                </div>
+
                 <p
                   className="about-one__text wow fadeInUp"
                   data-wow-delay="100ms"
@@ -115,11 +131,8 @@ const Reticulation = () => {
                   {reticulationData.description_01}
                 </p>
 
-                <div className="reticulation_page_title_design_two">
-                  <h5
-                    className="reticulation_page_title_design wow fadeInUp"
-                    data-wow-delay="100ms"
-                  >
+                <div className="reticulation_page_title_design_two margin-top-50">
+                  <h5 className="reticulation_page_title_design wow fadeInUp" data-wow-delay="100ms">
                     Advantage of Reticulated system:
                   </h5>
                 </div>
@@ -208,7 +221,7 @@ const Reticulation = () => {
             </div>
 
             {/* Image Right */}
-            <div className="col-xl-6 col-md-12 reticulation-mobile-hide-image-05">
+            <div className="col-xl-6 col-md-12 reticulation-mobile-hide-image-05 margin-bottom-50">
               <div className="about-one__righ">
                 <div
                   className="about-one__img-box wow slideInRight"
@@ -231,6 +244,7 @@ const Reticulation = () => {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>

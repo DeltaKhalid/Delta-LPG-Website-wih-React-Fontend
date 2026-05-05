@@ -99,7 +99,7 @@ const Cylinder = () => {
                   </div>
                 </div>
 
-                <div className="col-xl-8 col-lg-8 wow fadeInUp" data-wow-delay="200ms">
+                <div className="col-xl-8 col-lg-8 order-2 order-lg-1 wow fadeInUp" data-wow-delay="200ms">
                   <div className="services-one__single">
                     <div className="services-one__content">
                       <h3 className="services-one__title">{cylinderData.cylinder_1_name}</h3>
@@ -118,7 +118,7 @@ const Cylinder = () => {
           <section className="cylinder_page">
             <div className="container">
               <div className="row">
-                <div className="col-xl-8 col-lg-8 wow fadeInUp" data-wow-delay="200ms">
+                <div className="col-xl-8 col-lg-8 order-2 order-lg-1 wow fadeInUp" data-wow-delay="200ms">
                   <div className="services-one__single">
                     <div className="services-one__content">
                       <h3 className="services-one__title">{cylinderData.cylinder_2_name}</h3>
@@ -130,7 +130,7 @@ const Cylinder = () => {
                   </div>
                 </div>
 
-                <div className="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
+                <div className="col-xl-4 col-lg-4 order-1 order-lg-2 wow fadeInUp" data-wow-delay="100ms">
                   <div className="services-one__single">
                     <div className="services-one__img">
                       <img src={product35kg} alt="35 kg LP Gas Cylinder" />

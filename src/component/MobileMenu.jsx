@@ -9,6 +9,7 @@ const menuItems = [
         to: '/about',
         key: 'about',
         children: [
+            { label: 'About Company', to: '/about' },
             { label: 'Mission & Vision', to: '/mission-vision' },
             { label: 'Board of Director', to: '/board-of-director' },
         ],
@@ -81,13 +82,23 @@ const MobileMenu = ({ isOpen, onClose }) => {
                             return (
                                 <li key={item.label} className={`mob-nav-item${isActive ? ' mob-nav-item--active' : ''}`}>
                                     <div className="mob-nav-row">
-                                        <Link
-                                            to={item.to}
-                                            className="mob-nav-link"
-                                            onClick={onClose}
-                                        >
-                                            {item.label}
-                                        </Link>
+                                        {hasChildren ? (
+                                            <button
+                                                type="button"
+                                                className="mob-nav-link mob-nav-link--toggle"
+                                                onClick={() => toggleSubmenu(item.key)}
+                                            >
+                                                {item.label}
+                                            </button>
+                                        ) : (
+                                            <Link
+                                                to={item.to}
+                                                className="mob-nav-link"
+                                                onClick={onClose}
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        )}
                                         {hasChildren && (
                                             <button
                                                 type="button"

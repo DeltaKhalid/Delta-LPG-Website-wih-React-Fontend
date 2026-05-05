@@ -10,6 +10,7 @@ import { fetchAboutPageContent } from "../../api/apiCall";
 import pageHeaderBg from "../../assets/images/backgrounds/page-header-bg.jpg";
 import aboutBanner03 from "../../assets/images/resources/about_us_page_banner_03.png";
 import fireIcon from "../../assets/images/shapes/fire_icon.png";
+import distributionNetworkMap from "../../assets/images/gallery/delta_dis_network.png";
 
 const About = () => {
   const [aboutData, setAboutData] = useState(null);
@@ -35,7 +36,7 @@ const About = () => {
   if (!aboutData) return <p>No about us data available.</p>;
 
   return (
-    <div>
+    <div className="about-page-responsive">
       <div className="page-wrapper">
         {/* If you want Header/Footer, uncomment these */}
         {/* <Header /> */}
@@ -64,7 +65,7 @@ const About = () => {
         </section>
 
         {/* --- Page Content --- */}
-        <section className="about-three about-four">
+        <section className="about-three about-four about-page-main-section">
           <div className="container">
             <div className="row">
               <div className="col-xl-6">
@@ -112,6 +113,29 @@ const About = () => {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="about-page-distribution-section">
+          <div className="container">
+            <div className="section-title text-center">
+              <div className="section-sub-title-box">
+                <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms">
+                  DISTRIBUTION NETWORK
+                </p>
+                <div className="section-title-shape-1">
+                  <img src={fireIcon} alt="icon" />
+                </div>
+              </div>
+            </div>
+
+            <div className="about-page-distribution-map-box wow fadeInUp" data-wow-delay="100ms">
+              <img
+                src={distributionNetworkMap}
+                alt="Delta LPG distribution network map"
+                className="about-page-distribution-map"
+              />
             </div>
           </div>
         </section>

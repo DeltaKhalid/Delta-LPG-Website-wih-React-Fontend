@@ -110,9 +110,7 @@ const Bulk = () => {
                   <div className="empty_div"></div>
 
                   <div className="services-one__read-more">
-                    <a href="modified-roofing.html">
-                      Read More <i className="fa fa-arrow-right"></i>
-                    </a>
+
                   </div>
                 </div>
               </div>
@@ -140,9 +138,7 @@ const Bulk = () => {
                   <div className="empty_div"></div>
 
                   <div className="services-one__read-more">
-                    <a href="modified-roofing.html">
-                      Read More <i className="fa fa-arrow-right"></i>
-                    </a>
+
                   </div>
                 </div>
               </div>
@@ -169,9 +165,7 @@ const Bulk = () => {
                   <div className="empty_div"></div>
 
                   <div className="services-one__read-more">
-                    <a href="modified-roofing.html">
-                      Read More <i className="fa fa-arrow-right"></i>
-                    </a>
+
                   </div>
                 </div>
               </div>
@@ -198,9 +192,9 @@ const Bulk = () => {
                   <div className="empty_div"></div>
 
                   <div className="services-one__read-more">
-                    <a href="modified-roofing.html">
+                    {/* <a href="modified-roofing.html">
                       Read More <i className="fa fa-arrow-right"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -227,9 +221,9 @@ const Bulk = () => {
                   <div className="empty_div"></div>
 
                   <div className="services-one__read-more">
-                    <a href="modified-roofing.html">
+                    {/* <a href="modified-roofing.html">
                       Read More <i className="fa fa-arrow-right"></i>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
