@@ -21,6 +21,15 @@
 # Common
 -------------------------------------------------------------- roofsie-black */
 
+.section-title__title_two {
+    margin: 0;
+    color: var(--roofsie-black);
+    font-size: 48px;
+    line-height: 58px;
+    font-weight: 800;
+    margin-top: 50px;
+}
+
 /* Base styles for the video container (apply to all screen sizes) */
 .video_container iframe {
   width: 100%;  /* Set width to 100% for responsiveness */
