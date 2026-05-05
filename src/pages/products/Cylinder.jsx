@@ -6,7 +6,7 @@ import { fetchCylinderPage } from '../../api/apiCall';
 import useVisibility from '../../component/useVisibility';
 // --- for div fadeUp --- //
 import FadeUpTrigger from '../../assets/js/script';
-import '../../assets/css/my.css'; // Your CSS file with divFadeUp and animate
+import '../../assets/css/main.css'; // Your CSS file with divFadeUp and animate
 
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import mobileMenuLogo from '../assets/images/resources/delta_header_logo_r__170_91.png';
 
@@ -27,145 +27,118 @@ const menuItems = [
     { label: 'Contact', to: '/contact' },
 ];
 
-const MobileMenu = () => {
+const MobileMenu = ({ isOpen, onClose }) => {
     const location = useLocation();
     const [expandedMenus, setExpandedMenus] = useState({});
 
-    const activeParentKeys = useMemo(() => {
-        return menuItems
-            .filter((item) => item.children?.some((child) => child.to === location.pathname))
-            .map((item) => item.key);
+    // Close menu on route change
+    useEffect(() => {
+        onClose();
     }, [location.pathname]);
 
+    // Lock body scroll when menu is open
     useEffect(() => {
-        const togglerElements = document.querySelectorAll('.mobile-nav__toggler');
-        const mobileNavWrapper = document.querySelector('.mobile-nav__wrapper');
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [isOpen]);
 
-        const toggleMobileMenu = () => {
-            mobileNavWrapper?.classList.toggle('expanded');
-        };
-
-        togglerElements.forEach(el => el.addEventListener('click', toggleMobileMenu));
-
-        return () => {
-            togglerElements.forEach(el => el.removeEventListener('click', toggleMobileMenu));
-        };
+    const toggleSubmenu = useCallback((key) => {
+        setExpandedMenus(prev => ({ ...prev, [key]: !prev[key] }));
     }, []);
-
-    useEffect(() => {
-        setExpandedMenus((current) => {
-            const nextState = {};
-
-            activeParentKeys.forEach((key) => {
-                nextState[key] = true;
-            });
-
-            return { ...current, ...nextState };
-        });
-
-        const mobileNavWrapper = document.querySelector('.mobile-nav__wrapper');
-        mobileNavWrapper?.classList.remove('expanded');
-    }, [activeParentKeys, location.pathname]);
-
-    const handleCloseMenu = () => {
-        const mobileNavWrapper = document.querySelector('.mobile-nav__wrapper');
-        mobileNavWrapper?.classList.remove('expanded');
-    };
-
-    const toggleSubmenu = (key) => {
-        setExpandedMenus((current) => ({
-            ...current,
-            [key]: !current[key],
-        }));
-    };
 
     const isPathActive = (path) => location.pathname === path;
 
+    if (!isOpen) return null;
+
     return (
-        <div className="mobile-nav__wrapper">
-            <div className="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div className="mob-overlay" onClick={onClose}>
+            <div className="mob-panel" onClick={(e) => e.stopPropagation()}>
 
-            <div className="mobile-nav__content">
-                <span className="mobile-nav__close mobile-nav__toggler">
+                {/* Close button */}
+                <button className="mob-close-btn" onClick={onClose} aria-label="Close menu">
                     <i className="fa fa-times"></i>
-                </span>
+                </button>
 
-                <div className="logo-box ">
-                    <Link to="/" aria-label="logo image" onClick={handleCloseMenu}>
-                        <img src={mobileMenuLogo} width="170" height="90" alt="Logo" />
+                {/* Logo */}
+                <div className="mob-logo">
+                    <Link to="/" onClick={onClose}>
+                        <img src={mobileMenuLogo} width="170" height="90" alt="Delta Logo" />
                     </Link>
                 </div>
 
-                <div className="mobile-nav__container">
-                    <ul className="main-menu__list mobile-menu__list">
+                {/* Navigation */}
+                <nav className="mob-nav">
+                    <ul className="mob-nav-list">
                         {menuItems.map((item) => {
                             const isExpanded = Boolean(expandedMenus[item.key]);
                             const hasChildren = Boolean(item.children?.length);
-                            const parentActive = isPathActive(item.to) || item.children?.some((child) => isPathActive(child.to));
+                            const isActive = isPathActive(item.to) || item.children?.some((c) => isPathActive(c.to));
 
                             return (
-                                <li key={item.label} className={parentActive ? 'mobile-menu__item--active' : ''}>
-                                    <div className="mobile-menu__row">
+                                <li key={item.label} className={`mob-nav-item${isActive ? ' mob-nav-item--active' : ''}`}>
+                                    <div className="mob-nav-row">
                                         <Link
                                             to={item.to}
-                                            className="mobile-menu__link"
-                                            onClick={handleCloseMenu}
+                                            className="mob-nav-link"
+                                            onClick={onClose}
                                         >
-                                            <span>{item.label}</span>
+                                            {item.label}
                                         </Link>
-
-                                        {hasChildren ? (
+                                        {hasChildren && (
                                             <button
                                                 type="button"
-                                                className={`mobile-menu__toggle ${isExpanded ? 'expanded' : ''}`}
+                                                className={`mob-nav-toggle${isExpanded ? ' expanded' : ''}`}
+                                                onClick={() => toggleSubmenu(item.key)}
                                                 aria-expanded={isExpanded}
                                                 aria-label={`Toggle ${item.label} submenu`}
-                                                onClick={() => toggleSubmenu(item.key)}
                                             >
                                                 <i className="fa fa-angle-down"></i>
                                             </button>
-                                        ) : null}
+                                        )}
                                     </div>
-
-                                    {hasChildren ? (
-                                        <ul className={`mobile-menu__submenu ${isExpanded ? 'mobile-menu__submenu--open' : ''}`}>
+                                    {hasChildren && isExpanded && (
+                                        <ul className="mob-subnav-list">
                                             {item.children.map((child) => (
-                                                <li key={child.to} className={isPathActive(child.to) ? 'mobile-menu__item--active' : ''}>
+                                                <li key={child.to} className={isPathActive(child.to) ? 'mob-nav-item--active' : ''}>
                                                     <Link
                                                         to={child.to}
-                                                        className="mobile-menu__link mobile-menu__link--child"
-                                                        onClick={handleCloseMenu}
+                                                        className="mob-nav-link mob-nav-link--child"
+                                                        onClick={onClose}
                                                     >
-                                                        <span>{child.label}</span>
+                                                        {child.label}
                                                     </Link>
                                                 </li>
                                             ))}
                                         </ul>
-                                    ) : null}
+                                    )}
                                 </li>
                             );
                         })}
                     </ul>
+                </nav>
+
+                {/* Contact info */}
+                <div className="mob-contact">
+                    <a href="mailto:info@deltalpg.com" className="mob-contact-item">
+                        <span className="mob-contact-icon"><i className="fa fa-envelope"></i></span>
+                        info@deltalpg.com
+                    </a>
+                    <a href="tel:+880255011901" className="mob-contact-item">
+                        <span className="mob-contact-icon"><i className="fa fa-phone-alt"></i></span>
+                        +880 255 011 901
+                    </a>
                 </div>
 
-                <ul className="mobile-nav__contact list-unstyled mobile_menu_text_color">
-                    <li>
-                        <i className="fa fa-envelope"></i>
-                        <a href="mailto:info@deltalpg.com">info@deltalpg.com</a>
-                    </li>
-                    <li>
-                        <i className="fa fa-phone-alt"></i>
-                        <a href="tel:+880255011901">+880 255 011 901</a>
-                    </li>
-                </ul>
-
-                <div className="mobile-nav__top">
-                    <div className="mobile-nav__social">
-                        <a href="#" className="fab fa-twitter"></a>
-                        <a href="#" className="fab fa-facebook-square"></a>
-                        <a href="#" className="fab fa-pinterest-p"></a>
-                        <a href="#" className="fab fa-instagram"></a>
-                    </div>
+                {/* Social links */}
+                <div className="mob-social">
+                    <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i className="fab fa-facebook-square"></i></a>
+                    <a href="#" aria-label="Pinterest"><i className="fab fa-pinterest-p"></i></a>
+                    <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>

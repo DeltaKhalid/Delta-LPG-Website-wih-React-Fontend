@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDistributionPage } from '../api/apiCall';
 
-import '../assets/css/my.css'; // Adjust path if needed
+import '../assets/css/main.css'; // Adjust path if needed
 // import useScrollFadeUp from "../component/useScrollFadeUp.js"; // class for My-FadeIn-Up-Style
 
 
