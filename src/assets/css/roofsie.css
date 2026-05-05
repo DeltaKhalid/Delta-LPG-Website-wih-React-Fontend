@@ -32,13 +32,26 @@
 
 @media only screen and (max-width: 768px) {
   .trust-company__left {
-    display: none;
+    display: block;
+    width: 100%;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .trust-company {
-    display: none;
+    display: block;
+    padding: 20px 0;
+    overflow: visible;
+  }
+  .trust-company__right {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .trust-company iframe,
+  .trust-company video,
+  .video_container iframe {
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -353,7 +366,11 @@ ul {
   position: relative;
   display: block;
   margin-top: -7px;
-  margin-bottom: 49px;
+  margin-bottom: 12px;
+}
+
+.margin_top_50_px {
+  margin-top: 30px;
 }
 
 .section-sub-title-box {
@@ -897,14 +914,14 @@ ul {
 
 .main-menu .main-menu__list>li,
 .stricky-header .main-menu__list>li {
-  padding-top: 35px;
-  padding-bottom: 35px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   position: relative;
 }
 
 .main-menu .main-menu__list>li+li,
 .stricky-header .main-menu__list>li+li {
-  margin-left: 60px;
+  margin-left: 0;
 }
 
 .main-menu .main-menu__list>li>a,
@@ -3139,7 +3156,7 @@ ul {
 .feature-one {
   position: relative;
   display: block;
-  padding: 0 0 27px;
+  padding: 0 0 5px;
   margin-top: -3px;
   z-index: 92;
 }
@@ -3368,7 +3385,7 @@ ul {
 .about-one {
   position: relative;
   display: block;
-  padding: 0 0 120px;
+  padding: 0 0 30px;
 }
 
 .about-one__shape {
@@ -3566,7 +3583,7 @@ ul {
 .services-one {
   position: relative;
   display: block;
-  padding: 120px 0 90px;
+  padding: 40px 0 10px;
   z-index: 1;
 }
 
@@ -5093,6 +5110,7 @@ textarea.form-control {
 
   /*background-color: #84db8454; /* Your background color */
   /*opacity: 0.5; /* Set opacity to make it transparent */
+  overflow: hidden;
   z-index: 1;
   /*background-color: #00000000;*/
 }
@@ -10801,7 +10819,7 @@ textarea.form-control {
 .team-page {
   position: relative;
   display: block;
-  padding: 120px 0 90px;
+  padding: 50px 0 90px;
 }
 
 /*--------------------------------------------------------------

@@ -1,82 +1,104 @@
 
-
-import React from 'react';
-import Home from './pages/Home';
-import About from './pages/about/About';
-import Contact from './pages/Contact';
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import BoardOfDirectors from './pages/about/BoardOfDirectors';
-import MissionVision from './pages/about/MissionVision';
-import Cylinder from './pages/products/Cylinder';
-import Bulk from './pages/products/Bulk';
-import Reticulation from './pages/products/Reticulation';
-// import Autogas from './pages/products/Autogas';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './component/Header';
 import Footer from './component/Footer';
-import Distribution from './pages/Distribution';
-import { Link, NavLink } from 'react-router-dom'
-import ProductsList from './pages/order/ProductsList';
-import ApiTest from './constants/ApiTest';
-import OrderNow from './pages/products/OrderNow';
-import Faq from './pages/Faq';
-import AmirulHaque from './pages/about/AmirulHaque';
-import MustafaHaider from './pages/about/MustafaHaider';
-import ContactPage2 from './pages/ContactPage2';
-import ShopNow from './pages/order/ShopNow';
-import AddToCart from './pages/order/AddToCart';
-import CartAllPage from './pages/order/CartAllPage';
-import BuyNow from './pages/order/BuyNow';
+import Loader from './component/Loader';
+import { preloadSiteApis } from './api/startupLoader';
+
+const MINIMUM_LOADER_DURATION_MS = 3000;
+
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/about/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const BoardOfDirectors = lazy(() => import('./pages/about/BoardOfDirectors'));
+const MissionVision = lazy(() => import('./pages/about/MissionVision'));
+const Cylinder = lazy(() => import('./pages/products/Cylinder'));
+const Bulk = lazy(() => import('./pages/products/Bulk'));
+const Reticulation = lazy(() => import('./pages/products/Reticulation'));
+const Distribution = lazy(() => import('./pages/Distribution'));
+const ProductsList = lazy(() => import('./pages/order/ProductsList'));
+const ApiTest = lazy(() => import('./constants/ApiTest'));
+const OrderNow = lazy(() => import('./pages/products/OrderNow'));
+const Faq = lazy(() => import('./pages/Faq'));
+const AmirulHaque = lazy(() => import('./pages/about/AmirulHaque'));
+const MustafaHaider = lazy(() => import('./pages/about/MustafaHaider'));
+const ContactPage2 = lazy(() => import('./pages/ContactPage2'));
+const ShopNow = lazy(() => import('./pages/order/ShopNow'));
+const AddToCart = lazy(() => import('./pages/order/AddToCart'));
+const CartAllPage = lazy(() => import('./pages/order/CartAllPage'));
+const BuyNow = lazy(() => import('./pages/order/BuyNow'));
 
 const App = () => {
+  const [isAppReady, setIsAppReady] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    const minimumLoaderDelay = new Promise((resolve) => {
+      window.setTimeout(resolve, MINIMUM_LOADER_DURATION_MS);
+    });
+
+    Promise.all([preloadSiteApis(), minimumLoaderDelay]).finally(() => {
+      if (isMounted) {
+        setIsAppReady(true);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  if (!isAppReady) {
+    return <Loader label="Loading Delta LPG..." />;
+  }
+
   return (
-    <HashRouter>
+    <BrowserRouter>
       {/* --- Header with Menu --- */}
       <Header/>
       {/* --- All Page Routes ---- */}
-      <Routes>
-        <Route path='/' element={<Home/>}/>
+      <Suspense fallback={<Loader label="Loading page..." fullscreen={false} /> }>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
 
-        {/* --- About Us --- */}
-        <Route path='/about' element={<About/>}/>
-        <Route path='/board-of-director' element={<BoardOfDirectors/>}/>
-        <Route path='/mission-vision' element={<MissionVision/>}/>
-        <Route path='/amirul-haque' element={<AmirulHaque/>}/>
-        <Route path='/mustafa-haider' element={<MustafaHaider/>}/>
+          {/* --- About Us --- */}
+          <Route path='/about' element={<About/>}/>
+          <Route path='/board-of-director' element={<BoardOfDirectors/>}/>
+          <Route path='/mission-vision' element={<MissionVision/>}/>
+          <Route path='/amirul-haque' element={<AmirulHaque/>}/>
+          <Route path='/mustafa-haider' element={<MustafaHaider/>}/>
 
-        {/* --- Products --- */}
-        <Route path='/cylinder' element={<Cylinder/>}/>
-        <Route path='/bulk' element={<Bulk/>}/>
-        <Route path='/reticulation' element={<Reticulation/>}/>
-        {/* <Route path='/autogas' element={<Autogas/>}/> */}
+          {/* --- Products --- */}
+          <Route path='/cylinder' element={<Cylinder/>}/>
+          <Route path='/bulk' element={<Bulk/>}/>
+          <Route path='/reticulation' element={<Reticulation/>}/>
 
-        {/* --- Order of Product --- */}
-        <Route path='/product-list' element={<ProductsList/>}/>
-        <Route path='/shop-now' element={<ShopNow/>}/>
-        {/* --- Order Now Page --- */}
-        <Route path='/order-now' element={<OrderNow/>}/>
-        <Route path='/add-to-cart' element={<AddToCart/>}/>
-        <Route path='/cart-all-show' element={<CartAllPage/>}/>
-        <Route path='/buy-now' element={<BuyNow/>}/>
+          {/* --- Order of Product --- */}
+          <Route path='/product-list' element={<ProductsList/>}/>
+          <Route path='/shop-now' element={<ShopNow/>}/>
+          <Route path='/order-now' element={<OrderNow/>}/>
+          <Route path='/add-to-cart' element={<AddToCart/>}/>
+          <Route path='/cart-all-show' element={<CartAllPage/>}/>
+          <Route path='/buy-now' element={<BuyNow/>}/>
 
-        {/* --- Distribution Page --- */}
-        <Route path='/distribution' element={<Distribution/>}/>
+          {/* --- Distribution Page --- */}
+          <Route path='/distribution' element={<Distribution/>}/>
 
-        {/* --- Contact Us --- */}
-        <Route path='/contact' element={<Contact/>}/>
-        <Route path='/contact-page-2' element={<ContactPage2/>}/>
+          {/* --- Contact Us --- */}
+          <Route path='/contact' element={<Contact/>}/>
+          <Route path='/contact-page-2' element={<ContactPage2/>}/>
 
-        {/* --- API test Page --- */}
-        <Route path='/api-test' element={<ApiTest/>}/>
+          {/* --- API test Page --- */}
+          <Route path='/api-test' element={<ApiTest/>}/>
 
-
-
-        {/* --- FAQ Page --- */}
-        <Route path='/faqs' element={<Faq/>}/>
-
-      </Routes>
+          {/* --- FAQ Page --- */}
+          <Route path='/faqs' element={<Faq/>}/>
+        </Routes>
+      </Suspense>
       {/* --- Footer --- */}
       <Footer/>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// FontAwesome CDN (Add this in your index.html or load dynamically if needed)
+import React, { useState } from "react";
+
+// ✅ Correct for file location: src/pages/products/OrderNow.jsx
+import pageHeaderBg from "../../assets/images/backgrounds/page-header-bg.jpg";
 
 const OrderNow = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    cylinderType: '',
-    qty: '',
-    customerType: '',
-    district: '',
-    upazila: '',
-    address: '',
+    name: "",
+    phone: "",
+    cylinderType: "",
+    qty: "",
+    customerType: "",
+    district: "",
+    upazila: "",
+    address: "",
   });
 
   const [success, setSuccess] = useState(false);
@@ -23,29 +24,35 @@ const OrderNow = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted:', formData);
+    console.log("Submitted:", formData);
     setSuccess(true);
 
-    // Optional reset
     setFormData({
-      name: '',
-      phone: '',
-      cylinderType: '',
-      qty: '',
-      customerType: '',
-      district: '',
-      upazila: '',
-      address: '',
+      name: "",
+      phone: "",
+      cylinderType: "",
+      qty: "",
+      customerType: "",
+      district: "",
+      upazila: "",
+      address: "",
     });
   };
 
   return (
     <div className="page-wrapper">
       {/* Page Header */}
-      <section className="page-header bg-light py-5">
+      <section className="page-header fadeInUp">
+        <div
+          className="page-header-bg"
+          style={{ backgroundImage: `url(${pageHeaderBg})` }}
+        ></div>
+
         <div className="container text-center">
           <h2>Order Now</h2>
-          <p><a href="/">Home</a> / Order Now</p>
+          <p>
+            <a href="/">Home</a> / Order Now
+          </p>
         </div>
       </section>
 
@@ -62,7 +69,9 @@ const OrderNow = () => {
 
                       {/* Name */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">Name</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          Name
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -83,7 +92,9 @@ const OrderNow = () => {
 
                       {/* Phone */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">Phone Number</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          Phone Number
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -104,7 +115,9 @@ const OrderNow = () => {
 
                       {/* Cylinder Type */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">Cylinder Type</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          Cylinder Type
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -128,7 +141,9 @@ const OrderNow = () => {
 
                       {/* Quantity */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">Quantity</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          Quantity
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -149,7 +164,9 @@ const OrderNow = () => {
 
                       {/* Customer Type */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">Customer Type</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          Customer Type
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -173,7 +190,9 @@ const OrderNow = () => {
 
                       {/* District */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">District</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          District
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -200,7 +219,9 @@ const OrderNow = () => {
 
                       {/* Upazila */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">Upazila</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          Upazila
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -227,7 +248,9 @@ const OrderNow = () => {
 
                       {/* Address */}
                       <div className="form-group row mb-3">
-                        <label className="col-md-4 col-form-label text-md-right">Address</label>
+                        <label className="col-md-4 col-form-label text-md-right">
+                          Address
+                        </label>
                         <div className="col-md-8">
                           <div className="input-group">
                             <span className="input-group-text">
@@ -245,14 +268,13 @@ const OrderNow = () => {
                         </div>
                       </div>
 
-                      {/* Success message */}
                       {success && (
                         <div className="alert alert-success mt-3" role="alert">
-                          <i className="fas fa-check-circle"></i> Thanks for contacting us, we will get back to you shortly.
+                          <i className="fas fa-check-circle"></i> Thanks for contacting
+                          us, we will get back to you shortly.
                         </div>
                       )}
 
-                      {/* Submit Button */}
                       <div className="form-group row mt-4">
                         <div className="col-md-4"></div>
                         <div className="col-md-8">
@@ -274,6 +296,295 @@ const OrderNow = () => {
 };
 
 export default OrderNow;
+
+
+
+
+
+
+
+
+
+
+
+///---------------------------------------------- Old code 02 ---------------------------------------------- ///
+
+// import React, { useState } from 'react';
+// // import 'bootstrap/dist/css/bootstrap.min.css';
+// // FontAwesome CDN (Add this in your index.html or load dynamically if needed)
+
+// const OrderNow = () => {
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     phone: '',
+//     cylinderType: '',
+//     qty: '',
+//     customerType: '',
+//     district: '',
+//     upazila: '',
+//     address: '',
+//   });
+
+//   const [success, setSuccess] = useState(false);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log('Submitted:', formData);
+//     setSuccess(true);
+
+//     // Optional reset
+//     setFormData({
+//       name: '',
+//       phone: '',
+//       cylinderType: '',
+//       qty: '',
+//       customerType: '',
+//       district: '',
+//       upazila: '',
+//       address: '',
+//     });
+//   };
+
+//   return (
+//     <div className="page-wrapper">
+//       {/* Page Header */}
+//       <section className="page-header bg-light py-5">
+//         <div className="container text-center">
+//           <h2>Order Now</h2>
+//           <p><a href="/">Home</a> / Order Now</p>
+//         </div>
+//       </section>
+
+//       {/* Order Form */}
+//       <section className="services-page py-5">
+//         <div className="container">
+//           <div className="row justify-content-center">
+//             <div className="col-md-8 col-lg-6">
+//               <div className="card shadow">
+//                 <div className="card-body">
+//                   <form onSubmit={handleSubmit}>
+//                     <fieldset>
+//                       <legend className="text-center mb-4">Order Now</legend>
+
+//                       {/* Name */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">Name</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-user"></i>
+//                             </span>
+//                             <input
+//                               type="text"
+//                               name="name"
+//                               className="form-control"
+//                               placeholder="Your Name"
+//                               value={formData.name}
+//                               onChange={handleChange}
+//                               required
+//                             />
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Phone */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">Phone Number</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-phone"></i>
+//                             </span>
+//                             <input
+//                               type="text"
+//                               name="phone"
+//                               className="form-control"
+//                               placeholder="Phone Number"
+//                               value={formData.phone}
+//                               onChange={handleChange}
+//                               required
+//                             />
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Cylinder Type */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">Cylinder Type</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-gas-pump"></i>
+//                             </span>
+//                             <select
+//                               name="cylinderType"
+//                               className="form-control"
+//                               value={formData.cylinderType}
+//                               onChange={handleChange}
+//                               required
+//                             >
+//                               <option value="">Select Cylinder</option>
+//                               <option>12 KG Cylinder</option>
+//                               <option>22 KG Cylinder</option>
+//                               <option>35 KG Cylinder</option>
+//                             </select>
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Quantity */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">Quantity</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-sort-numeric-up"></i>
+//                             </span>
+//                             <input
+//                               type="number"
+//                               name="qty"
+//                               className="form-control"
+//                               placeholder="Enter Quantity"
+//                               value={formData.qty}
+//                               onChange={handleChange}
+//                               required
+//                             />
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Customer Type */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">Customer Type</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-users"></i>
+//                             </span>
+//                             <select
+//                               name="customerType"
+//                               className="form-control"
+//                               value={formData.customerType}
+//                               onChange={handleChange}
+//                               required
+//                             >
+//                               <option value="">Select Customer Type</option>
+//                               <option>Household</option>
+//                               <option>Retailer</option>
+//                               <option>Distributor</option>
+//                             </select>
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* District */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">District</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-map-marker-alt"></i>
+//                             </span>
+//                             <select
+//                               name="district"
+//                               className="form-control"
+//                               value={formData.district}
+//                               onChange={handleChange}
+//                               required
+//                             >
+//                               <option value="">Select District</option>
+//                               <option>Dhaka</option>
+//                               <option>Gazipur</option>
+//                               <option>Tongi</option>
+//                               <option>Manikgong</option>
+//                               <option>Narayangong</option>
+//                               <option>Savar</option>
+//                             </select>
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Upazila */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">Upazila</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-map-pin"></i>
+//                             </span>
+//                             <select
+//                               name="upazila"
+//                               className="form-control"
+//                               value={formData.upazila}
+//                               onChange={handleChange}
+//                               required
+//                             >
+//                               <option value="">Select Upazila</option>
+//                               <option>Dhaka</option>
+//                               <option>Gazipur</option>
+//                               <option>Tongi</option>
+//                               <option>Manikgong</option>
+//                               <option>Narayangong</option>
+//                               <option>Savar</option>
+//                             </select>
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Address */}
+//                       <div className="form-group row mb-3">
+//                         <label className="col-md-4 col-form-label text-md-right">Address</label>
+//                         <div className="col-md-8">
+//                           <div className="input-group">
+//                             <span className="input-group-text">
+//                               <i className="fas fa-pencil-alt"></i>
+//                             </span>
+//                             <textarea
+//                               name="address"
+//                               className="form-control"
+//                               placeholder="Your Address"
+//                               value={formData.address}
+//                               onChange={handleChange}
+//                               required
+//                             />
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Success message */}
+//                       {success && (
+//                         <div className="alert alert-success mt-3" role="alert">
+//                           <i className="fas fa-check-circle"></i> Thanks for contacting us, we will get back to you shortly.
+//                         </div>
+//                       )}
+
+//                       {/* Submit Button */}
+//                       <div className="form-group row mt-4">
+//                         <div className="col-md-4"></div>
+//                         <div className="col-md-8">
+//                           <button type="submit" className="btn btn-warning w-100">
+//                             Send <i className="fas fa-paper-plane"></i>
+//                           </button>
+//                         </div>
+//                       </div>
+//                     </fieldset>
+//                   </form>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     </div>
+//   );
+// };
+
+// export default OrderNow;
 
 
 

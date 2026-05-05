@@ -1,5 +1,7 @@
 import React from 'react';
 
+// this is loder component, it can be used in two ways:
+
 const Loader = ({ label = 'Loading...', fullscreen = true }) => {
   const wrapperClassName = fullscreen ? 'app-loader app-loader--fullscreen' : 'app-loader';
   const panelClassName = fullscreen ? 'app-loader__panel' : 'app-loader__panel app-loader__panel--inline';

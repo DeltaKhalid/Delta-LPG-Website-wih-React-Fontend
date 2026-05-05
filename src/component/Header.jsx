@@ -14,6 +14,8 @@ const Header = () => {
   const currentPath = location.pathname
   const isActive = (path) => currentPath === path
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   /// ================================================= Header Info API Call ================================================= ///
   const [headerData, setHeaderData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -111,7 +113,7 @@ const Header = () => {
                     <Link to="/">
                       {safeHeaderData.logo ? (
                         <img
-                            src={`${Urls.baseUrl}${safeHeaderData.logo}`} // *** mush import Urls from '../constants/urls';
+                            src={Urls.buildMediaUrl(safeHeaderData.logo)}
                             // alt={Array.from(productMap.values())[2].product_name}
                             alt='Delta Logo'
                             // style={{
@@ -127,8 +129,15 @@ const Header = () => {
                     </Link>
                   </div>
 
-                  <a href="#" className="mobile-nav__toggler"><i className="fa fa-bars"></i></a>
-                  <MobileMenu />
+                  <button
+                    type="button"
+                    className="mob-hamburger"
+                    onClick={() => setMobileMenuOpen(true)}
+                    aria-label="Open mobile menu"
+                  >
+                    <i className="fa fa-bars"></i>
+                  </button>
+                  <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
                   <ul className="main-menu__list">
                     <li className={`dropdown megamenu ${isActive('/') ? 'active-menu' : ''}`}>

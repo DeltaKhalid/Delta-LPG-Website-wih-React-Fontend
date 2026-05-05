@@ -3,12 +3,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --loader-primary: #25b09b;
-  --loader-secondary: #4b9fea;
+  --loader-primary: #66c445;
   --loader-backdrop: rgba(244, 245, 247, 0.88);
   --loader-panel: rgba(255, 255, 255, 0.82);
   --loader-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
-  --loader-text: #134e4a;
+  --loader-text: #2f6b1e;
 }
 
 html {
@@ -64,31 +63,17 @@ body {
 }
 
 .app-loader__spinner {
-  width: clamp(48px, 9vw, 68px);
-  aspect-ratio: 1;
-  display: grid;
-}
-
-.app-loader__spinner::before,
-.app-loader__spinner::after {
-  content: '';
-  grid-area: 1/1;
-  --loader-dot: no-repeat radial-gradient(farthest-side, var(--loader-primary) 92%, #0000);
+  --loader-cell: no-repeat linear-gradient(var(--loader-primary) 0 0);
+  width: 45px;
+  height: 45px;
   background:
-    var(--loader-dot) 50% 0,
-    var(--loader-dot) 50% 100%,
-    var(--loader-dot) 100% 50%,
-    var(--loader-dot) 0 50%;
-  background-size: clamp(10px, 2vw, 14px) clamp(10px, 2vw, 14px);
-  animation: app-loader-spin 1s infinite;
-}
-
-.app-loader__spinner::before {
-  margin: clamp(4px, 0.8vw, 6px);
-  filter: hue-rotate(45deg);
-  opacity: 0.95;
-  background-size: clamp(7px, 1.4vw, 10px) clamp(7px, 1.4vw, 10px);
-  animation-timing-function: linear;
+    var(--loader-cell), var(--loader-cell), var(--loader-cell),
+    var(--loader-cell), var(--loader-cell), var(--loader-cell),
+    var(--loader-cell), var(--loader-cell), var(--loader-cell);
+  background-size: 16px 16px;
+  animation:
+    app-loader-grid-size 1s infinite,
+    app-loader-grid-position 1s infinite;
 }
 
 .app-loader__label {
@@ -101,9 +86,47 @@ body {
   color: var(--loader-text);
 }
 
-@keyframes app-loader-spin {
+@keyframes app-loader-grid-size {
+  0%,
   100% {
-    transform: rotate(0.5turn);
+    width: 45px;
+    height: 45px;
+  }
+
+  35%,
+  65% {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+@keyframes app-loader-grid-position {
+  0%,
+  40% {
+    background-position:
+      0 0,
+      0 50%,
+      0 100%,
+      50% 100%,
+      100% 100%,
+      100% 50%,
+      100% 0,
+      50% 0,
+      50% 50%;
+  }
+
+  60%,
+  100% {
+    background-position:
+      0 50%,
+      0 100%,
+      50% 100%,
+      100% 100%,
+      100% 50%,
+      100% 0,
+      50% 0,
+      0 0,
+      50% 50%;
   }
 }
 

@@ -55,7 +55,7 @@ const ShopNow = () => {
 
                         {/* <img src={product.product_image} alt={product.product_name} /> */}
                         <img
-                            src={`${Urls.baseUrl}${product.product_image}`}
+                            src={Urls.buildMediaUrl(product.product_image)}
                             alt={product.product_name}
                             style={{
                                 width: "100%",

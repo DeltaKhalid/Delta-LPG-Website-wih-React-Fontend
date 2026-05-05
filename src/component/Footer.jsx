@@ -1,5 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { fetchFooterInfo } from '../api/apiCall';
+import { getPreloadedApiData, hasSitePreloadCompleted } from '../api/startupLoader';
+import siteFooterImg1 from '../assets/images/resources/site-footer-img-1.png';
+import siteFooterShape1 from '../assets/images/shapes/site-footer-shape-1.png';
 
 // import useScrollFadeUp from "../component/useScrollFadeUp.js"; 
 // import useScrollFadeUp from "../component/useScrollFadeUp.js"
@@ -13,8 +16,9 @@ const Footer = () => {
     // const [isVisible, setIsVisible] = useState(false);
 
     // Footer data state
-    const [footerData, setFooterData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const preloadedFooterData = getPreloadedApiData('footerInfo');
+    const [footerData, setFooterData] = useState(preloadedFooterData ?? null);
+    const [loading, setLoading] = useState(() => !preloadedFooterData && !hasSitePreloadCompleted());
     const safeFooterData = footerData ?? {};
 
 
@@ -74,6 +78,11 @@ const Footer = () => {
 
     /// ----------------------------------- Footer API Call ------------------- ///
     useEffect(() => {
+        if (preloadedFooterData) {
+            setLoading(false);
+            return;
+        }
+
         const getFooterData = async () => {
             try {
                 const data = await fetchFooterInfo();
@@ -105,10 +114,10 @@ const Footer = () => {
 
             <footer className="site-footer">
                 <div className="site-footer-img-1">
-                    <img src="src/assets/images/resources/site-footer-img-1.png" alt=""/>
+                    <img src={siteFooterImg1} alt=""/>
                 </div>
                 <div className="site-footer-shape-1">
-                    <img src="assets/images/shapes/site-footer-shape-1.png" alt=""/>
+                    <img src={siteFooterShape1} alt=""/>
                 </div>
                 <div className="container">
                     <div className="site-footer__top">

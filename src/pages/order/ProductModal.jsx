@@ -15,7 +15,7 @@ const PopupModal = ({ show, onClose, product }) => {
     // Reset modal data when product changes /// test project push
 useEffect(() => {
     if (product) {
-        setMainImage(`${Urls.baseUrl}${product.product_image}`);
+        setMainImage(Urls.buildMediaUrl(product.product_image));
         setQuantity(1);   // ✅ Always start from 1
         setSelectedType('refill');
     }
@@ -55,33 +55,33 @@ useEffect(() => {
                         <img src={mainImage} alt={product.product_name} className="main-image" />
                         <div className="thumbnail-container">
                             <img
-                                src={`${Urls.baseUrl}${product.product_image}`}
+                                src={Urls.buildMediaUrl(product.product_image)}
                                 alt="Thumbnail 1"
-                                className={`thumbnail ${mainImage === `${Urls.baseUrl}${product.product_image}` ? 'active' : ''}`}
-                                onClick={() => handleThumbnailClick(`${Urls.baseUrl}${product.product_image}`)}
+                                className={`thumbnail ${mainImage === Urls.buildMediaUrl(product.product_image) ? 'active' : ''}`}
+                                onClick={() => handleThumbnailClick(Urls.buildMediaUrl(product.product_image))}
                             />
                             {product.product_image_2 && (
                                 <img
-                                    src={`${Urls.baseUrl}${product.product_image_2}`}
+                                    src={Urls.buildMediaUrl(product.product_image_2)}
                                     alt="Thumbnail 2"
-                                    className={`thumbnail ${mainImage === `${Urls.baseUrl}${product.product_image_2}` ? 'active' : ''}`}
-                                    onClick={() => handleThumbnailClick(`${Urls.baseUrl}${product.product_image_2}`)}
+                                    className={`thumbnail ${mainImage === Urls.buildMediaUrl(product.product_image_2) ? 'active' : ''}`}
+                                    onClick={() => handleThumbnailClick(Urls.buildMediaUrl(product.product_image_2))}
                                 />
                             )}
                             {product.product_image_3 && (
                                 <img
-                                    src={`${Urls.baseUrl}${product.product_image_3}`}
+                                    src={Urls.buildMediaUrl(product.product_image_3)}
                                     alt="Thumbnail 3"
-                                    className={`thumbnail ${mainImage === `${Urls.baseUrl}${product.product_image_3}` ? 'active' : ''}`}
-                                    onClick={() => handleThumbnailClick(`${Urls.baseUrl}${product.product_image_3}`)}
+                                    className={`thumbnail ${mainImage === Urls.buildMediaUrl(product.product_image_3) ? 'active' : ''}`}
+                                    onClick={() => handleThumbnailClick(Urls.buildMediaUrl(product.product_image_3))}
                                 />
                             )}
                             {product.product_image_4 && (
                                 <img
-                                    src={`${Urls.baseUrl}${product.product_image_4}`}
+                                    src={Urls.buildMediaUrl(product.product_image_4)}
                                     alt="Thumbnail 4"
-                                    className={`thumbnail ${mainImage === `${Urls.baseUrl}${product.product_image_4}` ? 'active' : ''}`}
-                                    onClick={() => handleThumbnailClick(`${Urls.baseUrl}${product.product_image_4}`)}
+                                    className={`thumbnail ${mainImage === Urls.buildMediaUrl(product.product_image_4) ? 'active' : ''}`}
+                                    onClick={() => handleThumbnailClick(Urls.buildMediaUrl(product.product_image_4))}
                                 />
                             )}
                         </div>

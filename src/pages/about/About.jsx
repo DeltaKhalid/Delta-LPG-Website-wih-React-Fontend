@@ -1,160 +1,322 @@
-// import React from 'react';
-import React, { useEffect, useState } from 'react';
 
-import Header from '../../component/Header';
-import Footer from '../../component/Footer';
+import React, { useEffect, useState } from "react";
 
-// import { fetchAboutUsContent } from '../../api/apiCall';
+import Header from "../../component/Header";
+import Footer from "../../component/Footer";
 
-import { fetchAboutPageContent } from '../../api/apiCall';
+import { fetchAboutPageContent } from "../../api/apiCall";
 
-
-
+// ✅ Import assets (so the bundler includes them in production build)
+import pageHeaderBg from "../../assets/images/backgrounds/page-header-bg.jpg";
+import aboutBanner03 from "../../assets/images/resources/about_us_page_banner_03.png";
+import fireIcon from "../../assets/images/shapes/fire_icon.png";
 
 const About = () => {
+  const [aboutData, setAboutData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    const [aboutData, setAboutData] = useState(null);
-    const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const getAboutData = async () => {
+      try {
+        const data = await fetchAboutPageContent();
+        setAboutData(data);
+        console.log("About Us API Response Data:", data);
+      } catch (error) {
+        console.error("Failed to load about us data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    useEffect(() => {
-        const getAboutData = async () => {
-        try {
-            const data = await fetchAboutPageContent();
-            setAboutData(data);
-            console.log('About Us API Response Data :', data)
-        } catch (error) {
-            console.error('Failed to load about us data:', error);
-        } finally {
-            setLoading(false);
-        }
-        };
+    getAboutData();
+  }, []);
 
-        getAboutData();
-    }, []);
+  if (loading) return <p>Loading about us...</p>;
+  if (!aboutData) return <p>No about us data available.</p>;
 
-    if (loading) return <p>Loading about us...</p>;
-    if (!aboutData) return <p>No about us data available.</p>;
+  return (
+    <div>
+      <div className="page-wrapper">
+        {/* If you want Header/Footer, uncomment these */}
+        {/* <Header /> */}
 
-    // const [aboutContent, setAboutContent] = useState('');
-    // const [loading, setLoading] = useState(true);
+        {/* --- Page Header --- */}
+        <section className="page-header fadeInUp">
+          <div
+            className="page-header-bg"
+            style={{ backgroundImage: `url(${pageHeaderBg})` }}
+          />
 
-    // useEffect(() => {
-    //     const getContent = async () => {
-    //     try {
-    //         const data = await fetchAboutUsContent();
-    //         setAboutContent(data.content || []);
-    //         console.log(data);
+          <div className="container">
+            <div className="page-header__inner">
+              <ul className="thm-breadcrumb list-unstyled">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <span>/</span>
+                </li>
+                <li>About</li>
+              </ul>
+              <h2>About us</h2>
+            </div>
+          </div>
+        </section>
+
+        {/* --- Page Content --- */}
+        <section className="about-three about-four">
+          <div className="container">
+            <div className="row">
+              <div className="col-xl-6">
+                <div className="about-three__left">
+                  <div
+                    className="about-three__img-box wow slideInLeft"
+                    data-wow-delay="100ms"
+                    data-wow-duration="2500ms"
+                  >
+                    <div className="about-three__img">
+                      {/* If you need an image here, put it here */}
+                    </div>
+
+                    <div className="about-three__img-two">
+                      <img src={aboutBanner03} alt="About banner" />
+                    </div>
+
+                    {/* <div className="about-three__border"></div> */}
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-xl-6">
+                <div className="about-three__right">
+                  <div className="section-title text-left">
+                    <div className="section-sub-title-box">
+                      <p
+                        className="section-sub-title wow fadeInUp"
+                        data-wow-delay="100ms"
+                      >
+                        {aboutData.title}
+                      </p>
+
+                      <div className="section-title-shape-1">
+                        <img src={fireIcon} alt="icon" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <p
+                    className="about_us_text_design wow fadeInUp"
+                    data-wow-delay="100ms"
+                  >
+                    {aboutData.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* If you want Footer, uncomment */}
+        {/* <Footer /> */}
+      </div>
+    </div>
+  );
+};
+
+export default About;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///* ==================== Old code before image link update ================================= */
+
+// // import React from 'react';
+// import React, { useEffect, useState } from 'react';
+
+// import Header from '../../component/Header';
+// import Footer from '../../component/Footer';
+
+// // import { fetchAboutUsContent } from '../../api/apiCall';
+
+// import { fetchAboutPageContent } from '../../api/apiCall';
+
+// // Import your images here
+// import pageHeaderBg from '../../assets/images/backgrounds/page-header-bg.jpg';
+// import fireIcon from '../../assets/images/shapes/fire_icon.png';
+// import bannerImg from '../../assets/images/resources/about_us_page_banner_03.png';
+// import networkImg from '../../assets/images/gallery/delta_dis_network.png';
+
+
+
+
+// const About = () => {
+
+//     const [aboutData, setAboutData] = useState(null);
+//     const [loading, setLoading] = useState(true);
+
+//     useEffect(() => {
+//         const getAboutData = async () => {
+//         try {
+//             const data = await fetchAboutPageContent();
+//             setAboutData(data);
+//             console.log('About Us API Response Data :', data)
+//         } catch (error) {
+//             console.error('Failed to load about us data:', error);
+//         } finally {
+//             setLoading(false);
+//         }
+//         };
+
+//         getAboutData();
+//     }, []);
+
+//     if (loading) return <p>Loading about us...</p>;
+//     if (!aboutData) return <p>No about us data available.</p>;
+
+//     // const [aboutContent, setAboutContent] = useState('');
+//     // const [loading, setLoading] = useState(true);
+
+//     // useEffect(() => {
+//     //     const getContent = async () => {
+//     //     try {
+//     //         const data = await fetchAboutUsContent();
+//     //         setAboutContent(data.content || []);
+//     //         console.log(data);
             
-    //     } catch (error) {
-    //         setAboutContent('Failed to load content.');
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    //     };
+//     //     } catch (error) {
+//     //         setAboutContent('Failed to load content.');
+//     //     } finally {
+//     //         setLoading(false);
+//     //     }
+//     //     };
 
-    //     getContent();
-    // }, []);
+//     //     getContent();
+//     // }, []);
 
-    // --- Product List --- //
+//     // --- Product List --- //
     
 
 
 
 
 
-    return (
-        <div>
+//     return (
+//         <div>
             
-            {/* ----------------------------- Header with Menu ---------- */}
-            {/* <Header/> */}
-            {/* <h1> This is About Page.</h1> */}
+//             {/* ----------------------------- Header with Menu ---------- */}
+//             {/* <Header/> */}
+//             {/* <h1> This is About Page.</h1> */}
 
-            <div className="">
+//             <div className="">
 
-            <div className=""></div>
-            <div className=""></div>
+//             <div className=""></div>
+//             <div className=""></div>
 
-            {/* ---------------------------------------------------------- Pre Loder ----------------------------------------------------------------------- */}
-            {/* <div class="preloader">
-                <div class="preloader__image"></div>
-            </div> */}
-            {/* // /.preloader  */}
-
-
-            {/* // ============= Page Wrapper ===============// */}
-                <div className="page-wrapper">
-                    {/* === Header === */}
-                    {/* <Header/> */}
+//             {/* ---------------------------------------------------------- Pre Loder ----------------------------------------------------------------------- */}
+//             {/* <div class="preloader">
+//                 <div class="preloader__image"></div>
+//             </div> */}
+//             {/* // /.preloader  */}
 
 
-                    {/* <h1> This is About Page</h1> */}
-
-                    {/* --- Page Header --- */}
-                    <section className="page-header fadeInUp">
-
-                        <div
-                        className="page-header-bg"
-                        style={{ backgroundImage: "url(src/assets/images/backgrounds/page-header-bg.jpg)" }}>
-                        </div>
+//             {/* // ============= Page Wrapper ===============// */}
+//                 <div className="page-wrapper">
+//                     {/* === Header === */}
+//                     {/* <Header/> */}
 
 
-                        <div className="container">
-                            <div className="page-header__inner">
-                                <ul className="thm-breadcrumb list-unstyled">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><span>/</span></li>
-                                    <li>About</li>
-                                </ul>
-                                <h2>About us</h2>
-                            </div>
-                        </div>
-                    </section>
+//                     {/* <h1> This is About Page</h1> */}
 
-                    {/* --- Page Content --- */}
-                    <section className="about-three about-four">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-xl-6">
-                                    <div className="about-three__left">
-                                        <div className="about-three__img-box wow slideInLeft" data-wow-delay="100ms"
-                                        data-wow-duration="2500ms">
-                                            <div className="about-three__img">
-                                                {/*<img src="assets/images/resources/about_us_page_banner_03.png" alt=""/>*/}
-                                            </div>
-                                            <div className="about-three__img-two">
-                                                <img src="src/assets/images/resources/about_us_page_banner_03.png" alt=""/>
-                                            </div>
-                                            {/*<div className="about-three__border"></div>*/}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-xl-6">
-                                    <div className="about-three__right">
-                                        <div className="section-title text-left">
-                                            <div className="section-sub-title-box">
-                                                {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >About Delta LP Gas Ltd.</p> */}
-                                                <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{aboutData.title}</p>
-                                                <div className="section-title-shape-1">
-                                                    <img src="src/assets/images/shapes/fire_icon.png" alt=""/>
-                                                </div>
-                                            </div>
-                                            {/*<h2 className="section-title__title">Roofsie - exceptional roofing services</h2>*/}
-                                        </div>
+//                     {/* --- Page Header --- */}
+//                     <section className="page-header fadeInUp">
+
+//                         <div
+//                         className="page-header-bg"
+//                         // style={{ backgroundImage: "url(src/assets/images/backgrounds/page-header-bg.jpg)" }}>
+//                         style={{ backgroundImage: `url(${pageHeaderBg})` }}>
+//                         </div>
 
 
-                                        <p className="about_us_text_design wow fadeInUp" data-wow-delay="100ms">{aboutData.description}</p>
+//                         <div className="container">
+//                             <div className="page-header__inner">
+//                                 <ul className="thm-breadcrumb list-unstyled">
+//                                     <li><a href="index.html">Home</a></li>
+//                                     <li><span>/</span></li>
+//                                     <li>About</li>
+//                                 </ul>
+//                                 <h2>About us</h2>
+//                             </div>
+//                         </div>
+//                     </section>
 
-                                        {/* <p className="about_us_text_design wow fadeInUp" data-wow-delay="100ms" >DELTA LPG LIMITED (DLPGL), is an emerging LPG company of Bangladesh, was incorporated in Bangladesh as a 
-                                        Private Limited Company with limited liability in the year 2016. The company is lead by two pioneer businessmen Mr. Mohammad Mustafa Haider - 
-                                        the only son of Mr. M. Abul Kalam, Managing Director of T.K Group as the Chairman of the Company and Mr. Mohammed Amirul Haque of Seacom Group 
-                                        as the Managing Director of the Company. LPG sector is booming in Bangladesh under the current government’s initiative having huge prospect 
-                                        of opportunity growth which created scope for setting up more LPG satellite plants to meet huge future demand of LPG in Household & 
-                                        transportation sector. With the modern set up and cutting edge technology Delta LPG Limited is expecting to perform very favorably in 
-                                        the business in coming years.</p> */}
+//                     {/* --- Page Content --- */}
+//                     <section className="about-three about-four">
+//                         <div className="container">
+//                             <div className="row">
+//                                 <div className="col-xl-6">
+//                                     <div className="about-three__left">
+//                                         <div className="about-three__img-box wow slideInLeft" data-wow-delay="100ms"
+//                                         data-wow-duration="2500ms">
+//                                             <div className="about-three__img">
+//                                                 {/*<img src="assets/images/resources/about_us_page_banner_03.png" alt=""/>*/}
+//                                             </div>
+//                                             <div className="about-three__img-two">
+//                                                 <img src="src/assets/images/resources/about_us_page_banner_03.png" alt=""/>
+//                                             </div>
+//                                             {/*<div className="about-three__border"></div>*/}
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                                 <div className="col-xl-6">
+//                                     <div className="about-three__right">
+//                                         <div className="section-title text-left">
+//                                             <div className="section-sub-title-box">
+//                                                 {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >About Delta LP Gas Ltd.</p> */}
+//                                                 <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{aboutData.title}</p>
+//                                                 <div className="section-title-shape-1">
+//                                                     {/* <img src="src/assets/images/shapes/fire_icon.png" alt=""/> */}
+//                                                     <img src={fireIcon} alt="Fire Icon"/>
+//                                                 </div>
+//                                             </div>
+//                                             {/*<h2 className="section-title__title">Roofsie - exceptional roofing services</h2>*/}
+//                                         </div>
+
+
+//                                         <p className="about_us_text_design wow fadeInUp" data-wow-delay="100ms">{aboutData.description}</p>
+
+//                                         {/* <p className="about_us_text_design wow fadeInUp" data-wow-delay="100ms" >DELTA LPG LIMITED (DLPGL), is an emerging LPG company of Bangladesh, was incorporated in Bangladesh as a 
+//                                         Private Limited Company with limited liability in the year 2016. The company is lead by two pioneer businessmen Mr. Mohammad Mustafa Haider - 
+//                                         the only son of Mr. M. Abul Kalam, Managing Director of T.K Group as the Chairman of the Company and Mr. Mohammed Amirul Haque of Seacom Group 
+//                                         as the Managing Director of the Company. LPG sector is booming in Bangladesh under the current government’s initiative having huge prospect 
+//                                         of opportunity growth which created scope for setting up more LPG satellite plants to meet huge future demand of LPG in Household & 
+//                                         transportation sector. With the modern set up and cutting edge technology Delta LPG Limited is expecting to perform very favorably in 
+//                                         the business in coming years.</p> */}
                                         
                                         
-                                    </div>
-                                </div>
+//                                     </div>
+//                                 </div>
 
 
 
@@ -162,82 +324,82 @@ const About = () => {
 
 
 
-                            </div>
-                        </div>
-                    </section>
+//                             </div>
+//                         </div>
+//                     </section>
 
-                    <section>
+//                     <section>
 
 
 
 
                         
-                        {/* <div className="container section-title text-center">
-                            <div className="section-title text-center">
-                            <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p> */}
-                            {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{aboutData.title}</p> */}
-                            {/* <div className="section-title-shape-1 ">
-                                <img src="src/assets/images/shapes/fire_icon.png" alt=""/>
-                            </div>
-                        </div>
+//                         {/* <div className="container section-title text-center">
+//                             <div className="section-title text-center">
+//                             <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p> */}
+//                             {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{aboutData.title}</p> */}
+//                             {/* <div className="section-title-shape-1 ">
+//                                 <img src="src/assets/images/shapes/fire_icon.png" alt=""/>
+//                             </div>
+//                         </div>
 
-                        </div> */}
+//                         </div> */}
 
-                        <div className="section-title text-center">
-                            <div className="section-sub-title-box">
+//                         <div className="section-title text-center">
+//                             <div className="section-sub-title-box">
 
-                                <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p>
-                                {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{distributionData.title_one}</p> */}
+//                                 <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p>
+//                                 {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{distributionData.title_one}</p> */}
 
-                                <div className="section-title-shape-1">
-                                    <img src="src/assets/images/shapes/fire_icon.png" alt=""/>
-                                </div>
-                            </div>
-                            {/*<h2 className="section-title__title wow fadeInUp" data-wow-delay="100ms" >Our Mission and  Vision <br> </h2>*/}
-                        </div>
-
-
-
-                        <div className="section-title text-center">
-                            <div className="section-sub-title-box">
-
-                                {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p> */}
-                                {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{distributionData.title_one}</p> */}
-
-                                <div className="md-container">
-                                    <img src="src/assets/images/gallery/delta_dis_network.png" alt=""/>
-                                </div>
-                            </div>
-                            {/*<h2 className="section-title__title wow fadeInUp" data-wow-delay="100ms" >Our Mission and  Vision <br> </h2>*/}
-                        </div>
+//                                 <div className="section-title-shape-1">
+//                                     <img src="src/assets/images/shapes/fire_icon.png" alt=""/>
+//                                 </div>
+//                             </div>
+//                             {/*<h2 className="section-title__title wow fadeInUp" data-wow-delay="100ms" >Our Mission and  Vision <br> </h2>*/}
+//                         </div>
 
 
-                        
 
+//                         <div className="section-title text-center">
+//                             <div className="section-sub-title-box">
+
+//                                 {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >DISTRIBUTION NETWORK</p> */}
+//                                 {/* <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms" >{distributionData.title_one}</p> */}
+
+//                                 <div className="md-container">
+//                                     <img src="src/assets/images/gallery/delta_dis_network.png" alt=""/>
+//                                 </div>
+//                             </div>
+//                             {/*<h2 className="section-title__title wow fadeInUp" data-wow-delay="100ms" >Our Mission and  Vision <br> </h2>*/}
+//                         </div>
 
 
                         
-                    </section>
-
-
-                    {/* === Footer === */}
-                    {/* <Footer/> */}
 
 
 
-                </div>
+                        
+//                     </section>
+
+
+//                     {/* === Footer === */}
+//                     {/* <Footer/> */}
+
+
+
+//                 </div>
 
 
 
 
-            </div>
+//             </div>
 
 
 
-            {/* ----------------------------- Header with Menu ---------- */}
-            {/* <Footer/> */}
-        </div>
-    );
-};
+//             {/* ----------------------------- Header with Menu ---------- */}
+//             {/* <Footer/> */}
+//         </div>
+//     );
+// };
 
-export default About;
+// export default About;

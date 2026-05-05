@@ -5,16 +5,23 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { fetchHomeSlider } from '../api/apiCall';
 import Urls from '../constants/urls';
 import Loader from './Loader';
+import { getPreloadedApiData, hasSitePreloadCompleted } from '../api/startupLoader';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const ImageSlider = () => {
-  const [slides, setSlides] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const preloadedSlides = getPreloadedApiData('homeSlider');
+  const [slides, setSlides] = useState(preloadedSlides ?? []);
+  const [loading, setLoading] = useState(() => (!preloadedSlides || preloadedSlides.length === 0) && !hasSitePreloadCompleted());
 
   useEffect(() => {
+    if (preloadedSlides && preloadedSlides.length > 0) {
+      setLoading(false);
+      return;
+    }
+
     const getSliderImages = async () => {
       try {
         const data = await fetchHomeSlider();
@@ -32,21 +39,26 @@ const ImageSlider = () => {
   if (loading) return <Loader label="" fullscreen={false} />;
 
   return (
-    <div className="slider-container" style={{ width: '100%', height: '500px' }}>
+    <div className="slider-container home-slider" style={{ width: '100%', height: '500px' }}>
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
+        className="home-slider__swiper"
         loop={true}
+        slidesPerView={1}
+        centeredSlides={false}
+        spaceBetween={0}
+        watchOverflow={true}
         autoplay={{ delay: 3000 }}
-        pagination={{ clickable: true }}
+        pagination={{ clickable: true, dynamicBullets: true }}
         navigation
-        style={{ height: '100%' }}
+        style={{ width: '100%', height: '100%' }}
       >
         {slides.map((slider, index) => (
           <SwiperSlide key={index}>
             <div
               className="image-layer-three"
               style={{
-                backgroundImage: `url(${Urls.baseUrl}${slider.slider_img})`,
+                backgroundImage: `url(${Urls.buildMediaUrl(slider.slider_img)})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 width: '100%',
