@@ -7,6 +7,7 @@ import Loader from './component/Loader';
 import { preloadSiteApis } from './api/startupLoader';
 
 const MINIMUM_LOADER_DURATION_MS = 3000;
+const STARTUP_PREFETCH_MAX_WAIT_MS = 7000;
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/about/About'));
@@ -38,7 +39,17 @@ const App = () => {
       window.setTimeout(resolve, MINIMUM_LOADER_DURATION_MS);
     });
 
-    Promise.all([preloadSiteApis(), minimumLoaderDelay]).finally(() => {
+    const preloadWithSafetyTimeout = Promise.race([
+      preloadSiteApis(),
+      new Promise((resolve) => {
+        window.setTimeout(() => {
+          console.warn('Startup API prefetch timed out. Continuing app render.');
+          resolve();
+        }, STARTUP_PREFETCH_MAX_WAIT_MS);
+      }),
+    ]);
+
+    Promise.all([preloadWithSafetyTimeout, minimumLoaderDelay]).finally(() => {
       if (isMounted) {
         setIsAppReady(true);
       }

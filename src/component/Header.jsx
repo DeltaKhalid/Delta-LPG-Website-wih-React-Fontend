@@ -5,8 +5,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import { Link, useLocation } from 'react-router-dom'
 import MobileMenu from './MobileMenu'
 import { fetchHeaderInfo } from '../api/apiCall';
-import Urls from '../constants/urls';
 import { FaShoppingCart } from "react-icons/fa";
+import staticHeaderLogo from '../assets/images/resources/delta_header_logo_r__170_91.png';
 
 
 const Header = () => {
@@ -111,21 +111,15 @@ const Header = () => {
                   <div className="main-header__logo logo_padding_top">
                     {/* <Link to="/"><img src="../src/assets/images/resources/delta_header_logo_170_91.png" alt="Delta Logo" /></Link> */}
                     <Link to="/">
+                    {/* ------------ Logo Come from ApI is commneted -------------- */}
+                      {/* Previous dynamic logo code:
                       {safeHeaderData.logo ? (
-                        <img
-                            src={Urls.buildMediaUrl(safeHeaderData.logo)}
-                            // alt={Array.from(productMap.values())[2].product_name}
-                            alt='Delta Logo'
-                            // style={{
-                            // width: '100%',
-                            // maxWidth: '300px',
-                            // height: 'auto',
-                            // borderRadius: '5px',
-                            // }}
-                        />
+                        <img src={Urls.buildMediaUrl(safeHeaderData.logo)} alt='Delta Logo' />
                       ) : (
                         <span>Delta LPG</span>
                       )}
+                      */}
+                      <img src={staticHeaderLogo} alt='Delta Logo' />
                     </Link>
                   </div>
 
@@ -141,7 +135,7 @@ const Header = () => {
 
                   <ul className="main-menu__list">
                     <li className={`dropdown megamenu ${isActive('/') ? 'active-menu' : ''}`}>
-                      <Link to="/">Home 2</Link>
+                      <Link to="/">Home</Link>
                     </li>
 
                     <li className={`dropdown ${isActive('/about') ? 'active-menu' : ''}`}>

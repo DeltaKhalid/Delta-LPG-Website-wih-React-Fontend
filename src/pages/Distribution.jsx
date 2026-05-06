@@ -27,7 +27,9 @@ const Distribution = () => {
       { threshold: 0.1 }
     );
 
-    const elements = document.querySelectorAll(".distributionFadeInUp");
+    const elements = document.querySelectorAll(
+      ".distributionFadeInUp, .my-fadeIn-up-style, .my-fadeIn-up-style-two, .my-fadeIn-up-style-three"
+    );
     elements.forEach((el) => observer.observe(el));
 
     return () => {
@@ -92,7 +94,7 @@ const Distribution = () => {
           {/* --- page Content --- */}
           <div className="mission_vision_headline_padding">
             <div className="container">
-              <div className="section-title text-center">
+              <div className="section-title text-center distribution-our-facilities-subtitle-title">
                 <div className="section-sub-title-box">
                   <p className="section-sub-title wow fadeInUp" data-wow-delay="100ms">
                     {distributionData.title_one}
@@ -145,8 +147,8 @@ const Distribution = () => {
                 {/* Text Section */}
                 <div className="col-xl-6">
                   <div className="about-one__right">
-                    <div className="section-title text-left">
-                      <h2 className="section-title__title" data-wow-delay="100ms">
+                    <div className="section-title text-left distribution-facilities-section-title">
+                      <h2 className="section-title__title distribution-facilities-title" data-wow-delay="100ms">
                         {distributionData.headline_one}
                       </h2>
                     </div>
@@ -188,7 +190,8 @@ const Distribution = () => {
             <div className="container">
               <div className="section-title text-center">
                 <div className="section-sub-title-box">
-                  <h1 className="section-sub-title my-fade-up-style">Our Plants 55</h1>
+                  {/* <h1 className="section-sub-title my-fade-up-style">Our Plants</h1> */}
+                  <h1 className="section-sub-title my-fade-up-style distribution-our-facilities-subtitle-title">Our Plants</h1>
 
                   <div className="section-title-shape-1">
                     <img src={fireIcon} alt="" />
@@ -212,6 +215,7 @@ const Distribution = () => {
                     <div className="section-title text-left">
                       <h5 className="section-title__title_2 wow fadeInUp">
                         {distributionData.headline_three}
+                        
                       </h5>
                     </div>
 
@@ -220,7 +224,11 @@ const Distribution = () => {
                       data-wow-delay="100ms"
                       style={{ textAlign: "justify" }}
                     >
+                      {/* -- text from API -- */}
                       {distributionData.description_three}
+
+                      
+
                     </p>
 
                     <div className="section-title text-left ">
@@ -268,7 +276,7 @@ const Distribution = () => {
           </section>
 
           {/* --------------------------------------------------------------------------- Area 3 ------------------------------------------------------------ */}
-          <section className="distribution_headline">
+          <section className="distribution_headline margin-bottom-50">
             <div className="about-one__shape float-bob-x">
               <img src={aboutOneShape} alt="" />
             </div>
@@ -280,16 +288,25 @@ const Distribution = () => {
                     <div className="section-title text-left">
                       <h5 className="section-title__title_2" data-wow-delay="100ms">
                         {distributionData.headline_five}
+                        {/* Head line test 5. */}
                       </h5>
                     </div>
 
-                    <p
-                      className="about-one__text my-fadeIn-up-style"
+                    <div>
+                      <p 
+                      className="about-one__text wow fadeInUp"
                       data-wow-delay="100ms"
-                      style={{ textAlign: "justify" }}
-                    >
-                      {distributionData.description_five}
-                    </p>
+                      style={{ textAlign: "justify" }}  
+                      >
+                        {distributionData.description_five}
+                        {/* Located at Sayedpur, Narayangonj , Dhaka with an area of 3 Acres land, with total 
+                        yearly Storage Capacity of 216,000MT equipped with 6nos Mounted Tanks. 
+                        This plant also equipped with Filling hall for filling cylinders size of 12.5kg, 
+                        15kg, 33kg & 45 kg and has Bulk filling facilities to load Bobtail/LP gas 
+                        carrying lorries. */}
+                      </p>
+                    </div>
+
                   </div>
                 </div>
 

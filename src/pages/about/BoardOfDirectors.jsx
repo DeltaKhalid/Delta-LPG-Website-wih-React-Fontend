@@ -8,12 +8,16 @@ import Urls from "../../constants/urls";
 import pageHeaderBg from "../../assets/images/backgrounds/page-header-bg.jpg";
 import fireIcon from "../../assets/images/shapes/fire_icon.png";
 import teamShape from "../../assets/images/shapes/team-one-shape.png";
+import mdSirImage01 from "../../assets/images/team/md_sir_image_01.png";
+import chairmanSirImage from "../../assets/images/team/chairman sir.png";
 
 const BoardOfDirectors = () => {
   /// ================================================================= API Call Area ================================================== ///
 
   const [boardOfDirectorsData, setBoardOfDirectorsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const staticDirectorImages = [mdSirImage01, chairmanSirImage];
+  const staticDirectorNames = [null, "Mohammad Mustafa Haider"];
 
   useEffect(() => {
     const getDirectors = async () => {
@@ -120,15 +124,16 @@ const BoardOfDirectors = () => {
                       key={director.id ?? index}
                     >
                       <Link
-                        to={getRouteByName(director.name)}
+                        to={getRouteByName(staticDirectorNames[index] || director.name)}
                         className="team-one__single"
                         style={{ textDecoration: "none", color: "inherit" }}
                       >
                         <div className="team-one__img-box">
                           <div className="team-one__img">
                             <img
-                              src={getApiImageUrl(director.director_image)} // ✅ fixed (safe join)
-                              alt={director.name || "Director"}
+                              // src={getApiImageUrl(director.director_image)}
+                              src={staticDirectorImages[index] || mdSirImage01}
+                              alt={staticDirectorNames[index] || director.name || "Director"}
                               style={{
                                 width: "100%",
                                 height: "auto",
@@ -168,7 +173,7 @@ const BoardOfDirectors = () => {
                         <div className="team-one__content-box">
                           <div className="team-one__content">
                             <h3 className="team-one__name">
-                              <span>{director.name}</span>
+                              <span>{staticDirectorNames[index] || director.name}</span>
                             </h3>
                             <p className="team-one__sub-title">{director.designation}</p>
                             <ul className="list-unstyled team-one__social-two">
